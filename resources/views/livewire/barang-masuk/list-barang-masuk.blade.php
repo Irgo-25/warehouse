@@ -52,7 +52,7 @@
                                 <td scope="row" class="border-b"> {{$item->jumlah_masuk}} {{$item->barang->satuan}} </td>
                                 <td scope="row" class="border-b">{{$item->keterangan}}</td>
                                 <td class="py-4 border-b text-center">
-                                    <a href="{{route('editBarang', $item->id_barang_masuk)}}"
+                                    <a href="{{route('editBarangMasuk', $item->id_barang_masuk)}}"
                                         class="mr-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
                                             focus:outline-none focus:ring-blue-300 font-medium rounded-md text-xs p-1
                                             text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">

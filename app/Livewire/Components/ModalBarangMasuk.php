@@ -39,7 +39,7 @@ public function toogle(){
             $setCode = (int)substr($putcode->id_barang_masuk, 5) + 1;
         }
         $getCode = str_pad($setCode, 3, "0", STR_PAD_LEFT);
-        $this->id_barang_masuk = "IM-$getCode/$tanggal/$bulan/$tahun";
+        $this->id_barang_masuk = "IM-$tanggal$bulan$tahun$getCode";
     }
 
     public function mount()
