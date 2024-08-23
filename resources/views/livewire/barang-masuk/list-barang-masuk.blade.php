@@ -20,7 +20,7 @@
                             <tr class="text-center">
                                 @include('livewire.components.tableheader-sort',[
                                 'name' => 'id_barang_masuk',
-                                'displayName'=> 'KODE BARANG MASUK'
+                                'displayName'=> 'BATCH NUMBER'
                                 ])
                                 @include('livewire.components.tableheader-sort',[
                                 'name' => 'tanggal_masuk',
@@ -57,12 +57,6 @@
                                             focus:outline-none focus:ring-blue-300 font-medium rounded-md text-xs p-1
                                             text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
                                         Ubah Barang
-                                    </a>
-                                    <a href="" wire:click.prevent="delete('{{$item->id_barang_masuk}}')" class=" text-white bg-red-700 hover:bg-red-800 focus:ring-4
-                                            focus:outline-none focus:ring-red-300 font-medium rounded-md text-xs p-1
-                                            text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
-                                        type="button">
-                                        Hapus Barang
                                     </a>
                                 </td>
                             </tr>

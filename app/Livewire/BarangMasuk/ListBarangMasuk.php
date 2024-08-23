@@ -14,7 +14,7 @@ class ListBarangMasuk extends Component
 {
     use WithPagination;
     public $perPage = 5;
-
+    public $search;
     public $sortBy = 'created_at';
     public $sortDir = 'desc';
 
@@ -31,7 +31,10 @@ class ListBarangMasuk extends Component
 
     public function render()
     {
-        $items = DataBarangMasuk::paginate($this->perPage);
+        $items = DataBarangMasuk::with('barang')
+                    ->search($this->search)
+                    ->orderBy($this->sortBy, $this->sortDir)
+                    ->paginate($this->perPage);
         return view('livewire.barang-masuk.list-barang-masuk', [
             'items' => $items
         ]);

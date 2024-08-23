@@ -36,10 +36,10 @@ public function toogle(){
             $setCode = 1;
         } else {
             $putcode = DataBarangMasuk::latest()->first();
-            $setCode = (int)substr($putcode->id_barang_masuk, 5) + 1;
+            $setCode = (int)substr($putcode->id_barang_masuk, -4) + 1;
         }
-        $getCode = str_pad($setCode, 3, "0", STR_PAD_LEFT);
-        $this->id_barang_masuk = "IM-$tanggal$bulan$tahun$getCode";
+        $getCode = str_pad($setCode, 4, "0", STR_PAD_LEFT);
+        $this->id_barang_masuk = "IM-$tanggal$bulan$tahun-$getCode";
     }
 
     public function mount()

@@ -2,6 +2,7 @@
 
 use App\Livewire\Barang\EditBarang;
 use App\Livewire\Barang\ListBarang;
+use App\Livewire\BarangKeluar\ListBarangKeluar;
 use App\Livewire\BarangMasuk\EditBarangMasuk;
 use App\Livewire\BarangMasuk\ListBarangMasuk;
 use App\Livewire\User\EditUser;
@@ -52,3 +53,6 @@ Route::get('edit-barang/{kode_barang}', EditBarang::class)->name('editBarang');
 // route Barang Masuk
 Route::get('barang-masuk', ListBarangMasuk::class)->name('listBarangMasuk');
 Route::get('edit-barang-masuk/{id_barang_masuk}', EditBarangMasuk::class)->name('editBarangMasuk');
+
+// Route Barang Keluar
+Route::get('barang-keluar', ListBarangKeluar::class)->name('listBarangKeluar');

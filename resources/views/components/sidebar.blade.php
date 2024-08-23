@@ -58,6 +58,11 @@
                         <span class="flex-1 ms-3 whitespace-nowrap">Data Barang Masuk</span>
                     </x-nav-link>
                 </li>
+                <li>
+                    <x-nav-link href="{{route('listBarangKeluar')}}" :active="request()->routeIs('listBarangKeluar')">
+                        <span class="flex-1 ms-3 whitespace-nowrap">Data Barang Keluar</span>
+                    </x-nav-link>
+                </li>
             </ul>
     </div>
 </aside>

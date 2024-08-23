@@ -66,7 +66,7 @@
                         <div class="text-red-600">@error('keterangan') {{ $message }} @enderror</div>
                     </div>
                     <button type="submit" class="p-2 bg-[#36C2CE] rounded-md font-medium text-white">Simpan</button>
-                    <a href="{{ route('listBarang') }}"
+                    <a href="{{ route('listBarangMasuk') }}"
                         class="p-2 bg-red-700 rounded-md font-medium text-white">Batal</a>
                 </form>
             </div>

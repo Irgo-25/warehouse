@@ -17,7 +17,9 @@ class DataBarang extends Model
 
 
     public function scopeSearch(Builder $query, $value){
-        $query->where('kode_barang', 'like', "%$value%")->orWhere('nama_barang', 'like', "%$value%");
+        $query->where('kode_barang', 'like', "%$value%")->orWhere('nama_barang', 'like', "%$value%")->orwhereHas('category', function($query) use($value){
+            $query->where('kategori', 'like', "%$value%");
+        });
     }
 
     public function category(){
