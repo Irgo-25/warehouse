@@ -13,6 +13,7 @@ class DataBarangMasuk extends Model
 
   public $casts = [
     'barang_id' => 'string'
+    
   ];
 
   protected $fillable = ['id_barang_masuk', 'tanggal_masuk', 'barang_id', 'jumlah_masuk', 'keterangan'];

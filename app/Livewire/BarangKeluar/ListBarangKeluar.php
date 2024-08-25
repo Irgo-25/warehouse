@@ -2,6 +2,7 @@
 
 namespace App\Livewire\BarangKeluar;
 
+use App\Models\DataBarangKeluar;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Title;
@@ -13,12 +14,22 @@ class ListBarangKeluar extends Component
 {
     use WithPagination;
     public $perPage = 5;
-
+    public $search;
     public $sortBy = 'created_at';
     public $sortDir = 'desc';
     
+    public function sorting($setColumn){
+        if($this->sortBy == $setColumn){
+            $this->sortDir = ($this->sortDir == 'desc') ? 'asc' : 'desc'; 
+        }
+        $this->sortBy = $setColumn;
+    }
+
     public function render()
     {
-        return view('livewire.barang-keluar.list-barang-keluar');
+        $items = DataBarangKeluar::with('barang')->paginate($this->perPage);
+        return view('livewire.barang-keluar.list-barang-keluar', [
+            'items'=>$items
+        ]);
     }
 }

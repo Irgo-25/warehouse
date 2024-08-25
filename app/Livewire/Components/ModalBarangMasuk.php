@@ -25,8 +25,9 @@ public function toogle(){
 }
     public function generateCode()
     {
-        // Hitung banyak data di DB
+       // menghitung jumlah data rows di DB
         $anyItem = DataBarangMasuk::count();
+        // set waktu sekarang
         $date = Carbon::now();
         $tanggal = $date->format('d');
         $bulan = $date->format('m');
@@ -74,7 +75,7 @@ public function toogle(){
         $BarangMasuk->keterangan = $this->keterangan;
         $BarangMasuk->save();
         $stockMasuk = DataBarang::find($this->barang_id);
-        $stockMasuk->stock = $this->totalStock;
+        $stockMasuk->stock += $this->totalStock;
         $stockMasuk->save();
         return redirect()->route('listBarangMasuk');
     }
