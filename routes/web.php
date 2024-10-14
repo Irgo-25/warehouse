@@ -1,17 +1,20 @@
 <?php
 
-use App\Livewire\Barang\EditBarang;
-use App\Livewire\Barang\ListBarang;
-use App\Livewire\BarangKeluar\ListBarangKeluar;
-use App\Livewire\BarangMasuk\EditBarangMasuk;
-use App\Livewire\BarangMasuk\ListBarangMasuk;
+use App\Livewire\Unit\AddUnit;
+use App\Livewire\Unit\ListUnit;
 use App\Livewire\User\EditUser;
 use App\Livewire\User\IndexUser;
 use App\Livewire\User\CreateUser;
+use App\Livewire\Barang\EditBarang;
+use App\Livewire\Barang\ListBarang;
 use App\Livewire\Kategori\Kategori;
 use Illuminate\Support\Facades\Route;
-use App\Livewire\Kategori\CreateKategori;
 use App\Livewire\Kategori\EditKategori;
+use App\Livewire\Kategori\CreateKategori;
+use App\Livewire\BarangMasuk\EditBarangMasuk;
+use App\Livewire\BarangMasuk\ListBarangMasuk;
+use App\Livewire\BarangKeluar\ListBarangKeluar;
+use App\Livewire\BarangUnit\ListBarangUnit;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +47,7 @@ Route::get('edit-user/{id}', EditUser::class)->name('editUser');
 //route kategori
 Route::get('kategori-barang', Kategori::class)->name('kategoriBarang');
 Route::get('kategori-barang/create', CreateKategori::class)->name('addKategori');
-Route::get('kategori-barang/edit/{id_category}', EditKategori::class)->name('editKategori');
+Route::get('kategori-barang/edit/{id_kategori}', EditKategori::class)->name('editKategori');
 
 // route ListBarang
 Route::get('list-barang', ListBarang::class)->name('listBarang');
@@ -56,3 +59,10 @@ Route::get('edit-barang-masuk/{id_barang_masuk}', EditBarangMasuk::class)->name(
 
 // Route Barang Keluar
 Route::get('barang-keluar', ListBarangKeluar::class)->name('listBarangKeluar');
+
+// Route Unit
+Route::get('unit', ListUnit::class)->name('indexUnit');
+Route::get('unit/create', AddUnit::class)->name('addUnit');
+
+// Route Product Unit
+Route::get('shcema-unit', ListBarangUnit::class )->name('productUnit');

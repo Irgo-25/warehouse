@@ -11,9 +11,12 @@ class DataBarang extends Model
     protected $primaryKey='kode_barang';
     public $incrementing = false;
 
-    protected $fillable=['kode_barang', 'nama_barang','category_id','stock','satuan'];
+    protected $fillable=['kode_barang', 'nama_barang','kategori_id','stock','unit_id'];
 
-    protected $casts = ['category_id' => 'integer'];
+    protected $casts = [
+        'kategori_id' => 'integer',
+        'unit_id' => 'integer'
+    ];
 
 
     public function scopeSearch(Builder $query, $value){
@@ -23,7 +26,10 @@ class DataBarang extends Model
     }
 
     public function category(){
-        return $this->belongsTo(Kategori::class,'category_id');
+        return $this->belongsTo(Kategori::class,'kategori_id');
+    }
+    public function unit(){
+        return $this->belongsTo(Unit::class,'unit_id');
     }
 
     public function barangMasuks(){
@@ -32,5 +38,11 @@ class DataBarang extends Model
     
     public function barangKeluars(){
         return $this->hasMany(DataBarangKeluar::class);
+    }
+
+    public function units(){
+        return $this->belongsToMany(Unit::class, 'barang_unit')
+                    ->withPivot('conversion_unit')
+                    ->withTimestamps();
     }
 }

@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('data_barang', function (Blueprint $table) {
             $table->string('kode_barang', 25)->primary();
-            $table->string('nama_barang');
-            $table->foreignId('category_id')->constrained('kategoris', 'id_category');
+            $table->string('nama_barang',100);
+            $table->foreignId('kategori_id')->constrained('kategori','id_kategori');
+            $table->foreignId('unit_id')->constrained('units', 'id_unit');
             $table->integer('stock')->default(0);
-            $table->enum('satuan', ['Pcs', 'Roll', 'M', 'M2']);
+
             $table->timestamps();
         });
     }

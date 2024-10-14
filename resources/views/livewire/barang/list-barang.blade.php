@@ -3,6 +3,8 @@
         <h2 class="text-3xl font-semibold">List Barang</h2>
     </div>
     @livewire('components.modal-barang')
+
+    <x-alert-toast />
     <div class=" py-2 px-2 my-2 rounded-md bg-gray-100">
         {{-- searh and paginate --}}
         <div class=" my-2 flex justify-between">
@@ -27,7 +29,7 @@
                                 'displayName'=> 'NAMA BARANG'
                                 ])
                                 @include('livewire.components.tableheader-sort',[
-                                'name' => 'category_id',
+                                'name' => 'kategori_id',
                                 'displayName'=> 'KATEGORI'
                                 ])
                                 @include('livewire.components.tableheader-sort',[
@@ -35,8 +37,8 @@
                                 'displayName'=> 'STOCK'
                                 ])
                                 @include('livewire.components.tableheader-sort',[
-                                'name' => 'satuan',
-                                'displayName'=> 'SATUAN'
+                                'name' => 'unit_id',
+                                'displayName'=> 'UNIT'
                                 ])
                                 <th scope="col" class="border-r py-3">
                                     Action
@@ -49,8 +51,8 @@
                                 <th scope="row" class="border-b">{{$item->kode_barang}}</th>
                                 <td scope="row" class="border-b">{{$item->nama_barang}}</td>
                                 <td scope="row" class="border-b"> {{$item->category->kategori}} </td>
-                                <td scope="row" class="border-b"> {{$item->stock}} </td>
-                                <td scope="row" class="border-b">{{$item->satuan}}</td>
+                                <td scope="row" class="border-b"> {{$item->stock}} {{$item->satuan}} </td>
+                                <td scope="row" class="border-b">{{$item->unit->name}}</td>
                                 <td class="py-4 border-b text-center">
                                     <a href="{{route('editBarang', $item->kode_barang)}}"
                                         class="mr-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4

@@ -5,20 +5,25 @@ namespace App\Livewire\Components;
 use Livewire\Component;
 use App\Models\Kategori;
 use App\Models\DataBarang;
+use App\Models\Unit;
 
 class ModalBarang extends Component
 {
     public $show = false;
     public $kode_barang;
     public $nama_barang;
-    public $category_id;
-    public $stock;
-    public $satuan;
+    public $kategori_id;
+    public $unit_id;
 
     protected $rules = [
-        'nama_barang' => ['required'],
-        'category_id' => ['required'],
-        'satuan' => ['required'],
+        // 'kode_barang' => ['required', 'unique:data_barang,kode_barang'],
+        // 'nama_barang' => ['required'],
+        // 'kategori_id' => ['required'],
+        // 'unit_id' => ['required'],
+        'kode_barang' => 'required|unique:data_barang,kode_barang',
+        'nama_barang' => 'required',
+        'kategori_id' => 'required|exists:kategori,id_kategori',
+        'unit_id' => 'required|exists:units,id_unit',
     ];
     // form modal barang
     public function toogle()
@@ -44,9 +49,8 @@ class ModalBarang extends Component
     {
         $this->generateCode();
         $categoris = Kategori::all();
-        return view('livewire.components.modal-barang', [
-            'categoris' => $categoris,
-        ]);
+        $units = Unit::all();
+        return view('livewire.components.modal-barang', compact('categoris', 'units'));
     }
 
     public function submit()
@@ -56,9 +60,9 @@ class ModalBarang extends Component
         DataBarang::create([
             'kode_barang' => $this->kode_barang,
             'nama_barang' => $this->nama_barang,
-            'category_id' => $this->category_id,
-            'satuan' => $this->satuan,
+            'kategori_id' => $this->kategori_id,
+            'unit_id' => $this->unit_id,
         ]);
-        return redirect()->route('listBarang');
+        return redirect()->route('listBarang')->with('success', 'Successfully added');
     }
 }

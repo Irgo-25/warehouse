@@ -25,17 +25,17 @@
                                <td scope="row" class="border-b">{{$kategoris->firstItem()+$loop->index}}</td>
                                <td scope="row" class="border-b">{{$kategori->kategori}}</td>
                                <td class="px-6 py-4 border-b text-center">
-                                   <a href="{{route('editKategori', $kategori->id_category)}}" class=" text-white mr-2 bg-blue-700 hover:bg-blue-800 focus:ring-4
-                                       focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2
+                                   <a href="{{route('editKategori', $kategori->id_kategori)}}" class=" text-white mr-2 bg-blue-700 hover:bg-blue-800 focus:ring-4
+                                       focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm p-1
                                        text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                                        type="button">
-                                       Edit User
+                                       Edit
                                    </a>
-                                   <a href="" wire:click.prevent="" class=" text-white bg-red-700 hover:bg-red-800 focus:ring-4
-                                       focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-2
+                                   <a href="" wire:click.prevent="delete('{{$kategori->id_kategori}}')" class=" text-white bg-red-700 hover:bg-red-800 focus:ring-4
+                                       focus:outline-none focus:ring-red-300 font-medium rounded-md text-sm p-1
                                        text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
                                        type="button">
-                                       Deleter User
+                                       Delete
                                    </a>
                                </td>
                             </tr>

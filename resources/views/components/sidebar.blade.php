@@ -63,6 +63,16 @@
                         <span class="flex-1 ms-3 whitespace-nowrap">Data Barang Keluar</span>
                     </x-nav-link>
                 </li>
+                <li>
+                    <x-nav-link href="{{route('indexUnit')}}" :active="request()->routeIs('indexUnit')">
+                        <span class="flex-1 ms-3 whitespace-nowrap">Unit</span>
+                    </x-nav-link>
+                </li>
+                <li>
+                    <x-nav-link href="{{route('productUnit')}}" :active="request()->routeIs('procuctUnit')">
+                        <span class="flex-1 ms-3 whitespace-nowrap">Schema Unit </span>
+                    </x-nav-link>
+                </li>
             </ul>
     </div>
 </aside>

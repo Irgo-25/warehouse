@@ -6,11 +6,17 @@ use App\Models\Kategori as ModelsKategori;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 #[Layout('components.layouts.app')]
 #[Title('Kategori Barang')]
 class Kategori extends Component
 {
+    use WithPagination;
+
+    public function delete($id_kategori){
+        ModelsKategori::destroy($id_kategori);
+    }
 
     public function render()
     {

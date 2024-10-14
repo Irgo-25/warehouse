@@ -12,12 +12,13 @@ use Livewire\Component;
 class EditKategori extends Component
 {
     public $kategoriID;
+    public $id_kategori;
     public $kategori;
 
-    public function mount($id_category)
+    public function mount($id_kategori)
     {
-        $kategoris = Kategori::find($id_category);
-        $this->kategoriID = $kategoris->id_category;
+        $kategoris = Kategori::find($id_kategori);
+        $this->kategoriID = $kategoris->id_kategori;
         $this->kategori = $kategoris->kategori;
     }
 
@@ -28,6 +29,7 @@ class EditKategori extends Component
         $kategoris = Kategori::find($this->kategoriID);
         $kategoris->kategori = $this->kategori;
         $kategoris->save();
+        return redirect()->route('kategoriBarang');
 
     }
     public function render()

@@ -13,20 +13,22 @@ class CreateKategori extends Component
 {
     public $kategori;
 
-    public function rules(){
-        return [
-            'kategori' => ['required']
-        ];
-    }
-
     public function storeKategori(){
-        $this->validate();
-        Kategori::create([
-            'kategori'=> $this->kategori
+        $this->validate([
+            'kategori' => 'required'
         ]);
-        $this->reset('kategori');
+        $kategori = new Kategori();
+        $kategori->kategori = $this->kategori;
+        $kategori->save();
+        $this->reset();
     }
-    public function storeKategoriToIndex(){
+    public function storeToIndex(){
+        $this->validate([
+            'kategori' => 'required'
+        ]);
+        $kategori = new Kategori();
+        $kategori->kategori = $this->kategori;
+        $kategori->save();
         return redirect()->route('kategoriBarang');
 
     }

@@ -2,16 +2,20 @@
 
 namespace App\Livewire\Components;
 
+use App\Models\BarangUnit;
+use Carbon\Carbon;
 use Livewire\Component;
 use App\Models\DataBarang;
 use App\Models\DataBarangMasuk;
-use Carbon\Carbon;
+use App\Models\Unit;
 
 class ModalBarangMasuk extends Component
 {
-    public $show = false;
-    public $items, $stock = null, $totalStock;
-    public  $id_barang_masuk, $tanggal_masuk, $barang_id, $jumlah_masuk = null, $keterangan;
+    public $show = true;
+    public $items, $unit_id, $unitName, $units = [], $stock = null, $totalStock;
+    public $id_barang_masuk, $tanggal_masuk, $barang_id = null, $jumlah_masuk = null, $keterangan;
+    public $selectedUnit = null;
+    public $conversion_unit = 1;
 
     protected $rules = [
         'id_barang_masuk' => ['required'],
@@ -20,12 +24,13 @@ class ModalBarangMasuk extends Component
         'jumlah_masuk' => ['required', 'integer'],
         'keterangan' => ['required', 'max:220']
     ];
-public function toogle(){
-    $this->show = !$this->show;
-}
+    public function toogle()
+    {
+        $this->show = !$this->show;
+    }
     public function generateCode()
     {
-       // menghitung jumlah data rows di DB
+        // menghitung jumlah data rows di DB
         $anyItem = DataBarangMasuk::count();
         // set waktu sekarang
         $date = Carbon::now();
@@ -46,27 +51,41 @@ public function toogle(){
     public function mount()
     {
         $this->items = DataBarang::all();
+        $this->generateCode();
     }
 
-    public function getStock()
+    public function updateItem()
     {
-        $this->stock = DataBarang::all()
-            ->where('kode_barang', $this->barang_id)
-            ->value('stock');
+        // $this->stock = DataBarang::where('kode_barang', $this->barang_id)->value('stock');
+        // $this->units = DataBarang::where('kode_barang', $this->barang_id)->value('unit_id');
+        $dataBarangs = DataBarang::where('kode_barang', $this->barang_id)->first();
+        if ($dataBarangs) {
+            $this->stock = $dataBarangs->stock;
+            $this->unit_id = $dataBarangs->unit_id; // Ambil unit_id
+        }
+        $this->unitName = Unit::where('id_unit', $this->unit_id)->value('name');
+        $this->units = BarangUnit::where('barang_id', $this->barang_id)->get();
     }
 
     public function calculateStock()
     {
-        if(!$this->jumlah_masuk == null){
+        if ($this->jumlah_masuk !== null) {
+            $conversion = BarangUnit::where('barang_id', $this->barang_id)
+                            ->where('unit_id',$this->selectedUnit)
+                            ->value('conversion_unit');
 
-            $this->totalStock = $this->stock + $this->jumlah_masuk;
-        }else{
+            $this->totalStock = $this->stock + ($this->jumlah_masuk * $conversion);
+        } else {
             $this->totalStock = null;
         }
     }
 
-    public function submit(){
+    public function submit()
+    {
+        // validasi Data
         $this->validate();
+
+        // Simpan Data
         $BarangMasuk = new DataBarangMasuk();
         $BarangMasuk->id_barang_masuk = $this->id_barang_masuk;
         $BarangMasuk->tanggal_masuk = $this->tanggal_masuk;
@@ -81,7 +100,6 @@ public function toogle(){
     }
     public function render()
     {
-        $this->generateCode();
         return view('livewire.components.modal-barang-masuk');
     }
 }

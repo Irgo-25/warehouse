@@ -22,8 +22,7 @@ class ListBarang extends Component
 
     public function delete($kode_barang)
     {
-        $barang = DataBarang::find($kode_barang);
-        $barang->delete();
+        DataBarang::destroy($kode_barang);
     }
     public function sorting($setColumn)
     {
@@ -38,7 +37,7 @@ class ListBarang extends Component
     public function render()
     {
 
-        $items = DataBarang::with('category')->search($this->search)
+        $items = DataBarang::with('category','unit')->search($this->search)
             ->orderBy($this->sortBy, $this->sortDir)
             ->paginate($this->perPage);
         $this->resetPage();

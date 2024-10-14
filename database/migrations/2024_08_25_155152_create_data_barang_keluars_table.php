@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('data_barang_keluar', function (Blueprint $table) {
             $table->string('id_barang_keluar')->primary();
             $table->date('tanggal_keluar')->format('d/m/Y');
-            $table->string('barang_id', 25);
-            // mendefinisikan table relasi id barang
+            $table->string('barang_id');
             $table->foreign('barang_id')->references('kode_barang')->on('data_barang');
             $table->integer('jumlah_keluar', false);
+            $table->foreignId('unit_id')->constrained('units', 'id_unit')->nullable();
             $table->string('keterangan');
             $table->timestamps();
         });

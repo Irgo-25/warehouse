@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('data_barang_masuk', function (Blueprint $table) {
             $table->string('id_barang_masuk', 25)->primary();
-            $table->date('tanggal_masuk');
-            $table->string('barang_id', 25);
-            // mendefinisikan table relasi id barang
+            $table->date('tanggal_masuk')->format('d/m/Y');
+            $table->string('barang_id');
             $table->foreign('barang_id')->references('kode_barang')->on('data_barang');
             $table->integer('jumlah_masuk', false);
+            $table->foreignId('unit_id')->constrained('units', 'id_unit')->nullable();
             $table->string('keterangan');
             $table->timestamps();
         });
