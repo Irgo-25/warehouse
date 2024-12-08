@@ -8,22 +8,44 @@ use Livewire\Component;
 use App\Models\DataBarang;
 use App\Models\DataBarangMasuk;
 use App\Models\Unit;
+use PDO;
 
 class ModalBarangMasuk extends Component
 {
-    public $show = true;
+    public $show = false;
     public $items, $unit_id, $unitName, $units = [], $stock = null, $totalStock;
-    public $id_barang_masuk, $tanggal_masuk, $barang_id = null, $jumlah_masuk = null, $keterangan;
-    public $selectedUnit = null;
+    public $id_barang_masuk, $tanggal_masuk, $selectedbarang = null, $jumlah_masuk = null, $keterangan;
+    public $selectedunit;
     public $conversion_unit = 1;
 
     protected $rules = [
         'id_barang_masuk' => ['required'],
         'tanggal_masuk' => ['required', 'date'],
-        'barang_id' => ['required'],
+        'selectedbarang' => ['required'],
         'jumlah_masuk' => ['required', 'integer'],
         'keterangan' => ['required', 'max:220']
     ];
+    public function updatedSelectedbarang()
+    {
+        $dataBarangs = DataBarang::where('kode_barang', $this->selectedbarang)->first();
+        if ($dataBarangs) {
+            $this->stock = $dataBarangs->stock;
+            $this->unit_id = $dataBarangs->unit_id; // Ambil unit_id
+        }
+        $this->unitName = Unit::where('id_unit', $this->unit_id)->value('name');
+        $this->units = BarangUnit::where('barang_id', $this->selectedbarang)->get();
+        // Reset properti yang berhubungan
+        $this->selectedunit = null;
+        $this->jumlah_masuk = null;
+        $this->totalStock = null;
+
+        // Ambil data stock baru berdasarkan barang_id yang baru
+    }
+    public function mount()
+    {
+        $this->items = DataBarang::all();
+        $this->generateCode();
+    }
     public function toogle()
     {
         $this->show = !$this->show;
@@ -48,35 +70,14 @@ class ModalBarangMasuk extends Component
         $this->id_barang_masuk = "IM-$tanggal$bulan$tahun-$getCode";
     }
 
-    public function mount()
+    public function updatedJumlahmasuk()
     {
-        $this->items = DataBarang::all();
-        $this->generateCode();
-    }
-
-    public function updateItem()
-    {
-        // $this->stock = DataBarang::where('kode_barang', $this->barang_id)->value('stock');
-        // $this->units = DataBarang::where('kode_barang', $this->barang_id)->value('unit_id');
-        $dataBarangs = DataBarang::where('kode_barang', $this->barang_id)->first();
-        if ($dataBarangs) {
-            $this->stock = $dataBarangs->stock;
-            $this->unit_id = $dataBarangs->unit_id; // Ambil unit_id
-        }
-        $this->unitName = Unit::where('id_unit', $this->unit_id)->value('name');
-        $this->units = BarangUnit::where('barang_id', $this->barang_id)->get();
-    }
-
-    public function calculateStock()
-    {
-        if ($this->jumlah_masuk !== null) {
-            $conversion = BarangUnit::where('barang_id', $this->barang_id)
-                            ->where('unit_id',$this->selectedUnit)
-                            ->value('conversion_unit');
+        if (!is_null($this->jumlah_masuk)) {
+            $conversion = BarangUnit::where('barang_id', $this->selectedbarang)
+                ->where('unit_id', $this->selectedunit)
+                ->value("conversion_unit");
 
             $this->totalStock = $this->stock + ($this->jumlah_masuk * $conversion);
-        } else {
-            $this->totalStock = null;
         }
     }
 
@@ -88,13 +89,14 @@ class ModalBarangMasuk extends Component
         // Simpan Data
         $BarangMasuk = new DataBarangMasuk();
         $BarangMasuk->id_barang_masuk = $this->id_barang_masuk;
+        $BarangMasuk->barang_id = $this->selectedbarang;
         $BarangMasuk->tanggal_masuk = $this->tanggal_masuk;
-        $BarangMasuk->barang_id = $this->barang_id;
         $BarangMasuk->jumlah_masuk = $this->jumlah_masuk;
+        $BarangMasuk->unit_id = $this->selectedunit;
         $BarangMasuk->keterangan = $this->keterangan;
         $BarangMasuk->save();
-        $stockMasuk = DataBarang::find($this->barang_id);
-        $stockMasuk->stock += $this->totalStock;
+        $stockMasuk = DataBarang::find($this->selectedbarang);
+        $stockMasuk->stock = $this->totalStock;
         $stockMasuk->save();
         return redirect()->route('listBarangMasuk');
     }

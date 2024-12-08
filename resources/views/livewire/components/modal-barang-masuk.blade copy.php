@@ -37,7 +37,7 @@
                         <div class="mb-3">
                             <label for="Barang"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Barang</label>
-                            <select id="barang" wire:model.live="selectedbarang"
+                            <select id="barang" wire:model="barang_id" wire:change="updateItem()"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option value="">Pilih Barang</option>
                                 @foreach ($items as $item)
@@ -48,36 +48,31 @@
                             <div class="text-red-600">@error('barang_id') {{ $message }} @enderror</div>
                         </div>
                         <div class="mb-3">
-                            <label for="stock"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Stock
-                                Sekarang</label>
+                            <label for="website-admin" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Stock Sekarang</label>
                             <div class="flex">
-                                <input value="{{$stock}}" wire:model="stock" id="stock"
-                                    class="rounded-none rounded-s-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    disabled>
-                                <span
-                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-e-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600"
-                                    disabled>
+                                <input value="{{$stock}}" id="website-admin" class="rounded-none rounded-s-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>
+                                <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-e-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600"disabled>
                                     {{$unitName}}
                                 </span>
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="selectedunit" class="block mb-3 text-sm font-medium text-gray-700">Unit
+                            <label for="unit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Unit
                                 Konversi</label>
-                            <select wire:model="selectedunit" id="selectedunit"
-                                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                <option value="">Pilih Unit</option>
+                            <select id="unit" wire:model="selectedUnit"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                <option value="">Pilih Konversi</option>
                                 @foreach($units as $unit)
-                                <option value="{{ $unit->unit_id }}">{{ $unit->unit->name }}
-                                    ({{ $unit->conversion_unit }})</option>
+                                <option value="{{ $unit->unit_id }}">
+                                    1 {{ $unit->unit->name }} = {{$unit->conversion_unit}}
+                                </option>
                                 @endforeach
                             </select>
                             <div class="text-red-600">@error('barang_id') {{ $message }} @enderror</div>
                         </div>
                         <div class="mb-3">
                             <label class="text-base font-medium block mb-2" for="jumlah-masuk">Jumlah Masuk :</label>
-                            <x-input type="number" wire:model="jumlah_masuk"/>
+                            <x-input type="number" wire:model="jumlah_masuk" wire:change="calculateStock" />
                             <div class="text-red-600">@error('jumlah_masuk') {{ $message }} @enderror</div>
                         </div>
                         <div class="mb-3">
@@ -98,5 +93,7 @@
             </div>
         </div>
     </div>
+
+
     @endif
 </div>

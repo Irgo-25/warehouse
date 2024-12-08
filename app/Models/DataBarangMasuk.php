@@ -21,6 +21,10 @@ class DataBarangMasuk extends Model
   {
     return $this->belongsTo(DataBarang::class, 'barang_id');
   }
+  public function unit()
+  {
+    return $this->belongsTo(Unit::class,'unit_id');
+  }
 
   public function scopeSearch(Builder $query, $value)
   {
