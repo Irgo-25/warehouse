@@ -47,8 +47,6 @@
                             @forelse ($items as $item)
                             <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600 ">
                                 <th scope="row" class="border-b">{{$item->id_barang_masuk}}</th>
-                                <td scope="row" class="border-b">
-                                    {{Carbon\Carbon::parse($item->tanggal_masuk)->translatedFormat('d F Y')}}</td>
                                 <td scope="row" class="border-b"> {{$item->barang->nama_barang}} </td>
                                 <td scope="row" class="border-b"> {{$item->jumlah_masuk}} {{$item->unit->name}}
                                 </td>
