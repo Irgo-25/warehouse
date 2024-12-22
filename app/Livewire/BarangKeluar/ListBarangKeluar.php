@@ -27,7 +27,7 @@ class ListBarangKeluar extends Component
 
     public function render()
     {
-        $items = DataBarangKeluar::with('barang')->paginate($this->perPage);
+        $items = DataBarangKeluar::with('barang', 'unit')->paginate($this->perPage);
         return view('livewire.barang-keluar.list-barang-keluar', [
             'items'=>$items
         ]);

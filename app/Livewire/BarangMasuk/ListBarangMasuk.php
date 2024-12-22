@@ -31,7 +31,7 @@ class ListBarangMasuk extends Component
 
     public function render()
     {
-        $items = DataBarangMasuk::with('barang')
+        $items = DataBarangMasuk::with('barang', 'unit')
                     ->search($this->search)
                     ->orderBy($this->sortBy, $this->sortDir)
                     ->paginate($this->perPage);

@@ -70,15 +70,14 @@ class ModalBarangMasuk extends Component
         $this->id_barang_masuk = "IM-$tanggal$bulan$tahun-$getCode";
     }
 
-    public function updatedJumlahmasuk()
+    public function updatedJumlahmasuk($conversion)
     {
+        $conversion = BarangUnit::where('barang_id', $this->selectedbarang)
+            ->where('unit_id', $this->selectedunit)
+            ->value("conversion_unit");
         if (!is_null($this->jumlah_masuk)) {
-            $conversion = BarangUnit::where('barang_id', $this->selectedbarang)
-                ->where('unit_id', $this->selectedunit)
-                ->value("conversion_unit");
-
             $this->totalStock = $this->stock + ($this->jumlah_masuk * $conversion);
-        }
+            }
     }
 
     public function submit()

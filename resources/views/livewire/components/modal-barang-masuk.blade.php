@@ -80,12 +80,12 @@
                             <x-input type="number" wire:model="jumlah_masuk"/>
                             <div class="text-red-600">@error('jumlah_masuk') {{ $message }} @enderror</div>
                         </div>
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <label class="text-base font-medium block mb-2" for="total-stock">Total Stock :</label>
-                            <x-input type="number" value="{{$totalStock}}" disabled />
+                            <x-input type="number" wire:model="total_stock" value="{{$totalStock}}" disabled />
                             <div class="text-red-600">@error('keterangan') {{ $message }} @enderror</div>
-                        </div>
-                        <div class="mb-3">
+                        </div> --}}
+                        <div class="mb-3 col-span-2">
                             <label class="text-base font-medium block mb-2" for="keterangan">Keterangan :</label>
                             <x-input type="text" wire:model="keterangan" placeholder="Masukan Keterangan" />
                             <div class="text-red-600">@error('keterangan') {{ $message }} @enderror</div>

@@ -47,11 +47,12 @@
                         <tbody>
                             @forelse ($items as $item)
                             <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600 ">
-                                <th scope="row" class="border-b"></th>
-                                <td scope="row" class="border-b"></td>
-                                <td scope="row" class="border-b"></td>
-                                <td scope="row" class="border-b"></td>
-                                <td scope="row" class="border-b"></td>
+                                <th scope="row" class="border-b">{{$item->id_barang_keluar}}</th>
+                                <td scope="row" class="border-b">
+                                    {{Carbon\Carbon::parse($item->tanggal_keluar)->translatedFormat('d F Y')}}</td>
+                                <td scope="row" class="border-b">{{$item->barang->nama_barang}}</td>
+                                <td scope="row" class="border-b">{{$item->jumlah_keluar}} {{$item->unit->name}}</td>
+                                <td scope="row" class="border-b">{{$item->keterangan}}</td>
                                 <td class="py-4 border-b text-center">
                                     <a href=""
                                         class="mr-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
