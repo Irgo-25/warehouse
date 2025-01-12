@@ -11,10 +11,12 @@ use App\Livewire\Kategori\Kategori;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Kategori\EditKategori;
 use App\Livewire\Kategori\CreateKategori;
+use App\Http\Controllers\LaporanListBarang;
+use App\Livewire\BarangUnit\ListBarangUnit;
 use App\Livewire\BarangMasuk\EditBarangMasuk;
 use App\Livewire\BarangMasuk\ListBarangMasuk;
 use App\Livewire\BarangKeluar\ListBarangKeluar;
-use App\Livewire\BarangUnit\ListBarangUnit;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -66,3 +68,6 @@ Route::get('unit/create', AddUnit::class)->name('addUnit');
 
 // Route Product Unit
 Route::get('shcema-unit', ListBarangUnit::class )->name('productUnit');
+
+// Route Export PDF
+Route::get('Laporan List Barang', [LaporanListBarang::class, 'PdfListBarang'])->name('listBarangPdf');

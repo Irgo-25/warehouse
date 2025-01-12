@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Barang;
 
+use App\Livewire\BarangUnit\ListBarangUnit;
+use App\Models\BarangUnit;
 use App\Models\Unit;
 use Livewire\Component;
 use App\Models\Kategori;
@@ -13,10 +15,13 @@ use Livewire\Attributes\Layout;
 #[Title('Edit Barang')]
 class EditBarang extends Component
 {
+    public $barang_id;
+    public $conversion_unit;
     public $kode_barang;
     public $nama_barang;
     public $kategori_id;
     public $unit_id;
+    public $unit_barang;
 
     protected $rules = [
         'nama_barang'=>['required'],
@@ -25,7 +30,7 @@ class EditBarang extends Component
     ];
 
     public function mount($kode_barang){
-        $Barang = DataBarang::find($kode_barang);
+        $Barang = DataBarang::findOrFail($kode_barang);
         $this->kode_barang = $Barang->kode_barang;
         $this->nama_barang = $Barang->nama_barang;
         $this->kategori_id = $Barang->kategori_id;
@@ -43,10 +48,33 @@ class EditBarang extends Component
         return redirect()->route('listBarang');
     }
 
+    public function storeBarangUnit()
+    {
+        $this->validate([
+            'kode_barang' => 'required|exists:data_barang,kode_barang',
+            'unit_barang' => 'required|exists:units,id_unit',
+            'conversion_unit' => 'required|numeric|min:1',
+        ]);
+
+        $barangUnit = new BarangUnit();
+        $barangUnit->barang_id = $this->kode_barang;
+        $barangUnit->unit_id = $this->unit_barang;
+        $barangUnit->conversion_unit = $this->conversion_unit;
+        $barangUnit->save();
+        $this->reset('conversion_unit');
+
+    }
+
+    public function listBarangUnit(){
+        $items = BarangUnit::where('barang_id', $this->kode_barang)->with('unit')->get();
+        return $items;
+    }
+
     public function render()
     {
+        $items = $this->listBarangUnit($this->kode_barang);
         $kategoris = Kategori::all();
         $units = Unit::all();
-        return view('livewire.barang.edit-barang',compact('kategoris', 'units'));
+        return view('livewire.barang.edit-barang',compact('kategoris', 'units', 'items'));
     }
 }

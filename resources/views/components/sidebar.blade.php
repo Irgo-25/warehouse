@@ -68,11 +68,11 @@
                         <span class="flex-1 ms-3 whitespace-nowrap">Unit</span>
                     </x-nav-link>
                 </li>
-                <li>
+                {{-- <li>
                     <x-nav-link href="{{route('productUnit')}}" :active="request()->routeIs('procuctUnit')">
                         <span class="flex-1 ms-3 whitespace-nowrap">Schema Unit </span>
                     </x-nav-link>
-                </li>
+                </li> --}}
             </ul>
     </div>
 </aside>
