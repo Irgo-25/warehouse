@@ -10,7 +10,7 @@
 <body>
     <H3 class="Heading">Laporan List Barang</H3>
     <table class="table">
-        <thead>
+        <thead class="thead">
             <tr>
                 <th>Kode Barang</th>
                 <th>Nama Barang</th>
@@ -18,7 +18,7 @@
                 <th>Stock</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="tbody">
             @foreach ($items as $item)    
             <tr>
                 <td>{{$item->kode_barang}}</td>

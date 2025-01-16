@@ -1,5 +1,5 @@
 <div>
-    <button wire:click="toogle" class="px-4 py-2 bg-blue-500 text-white rounded">
+    <button wire:click="toogle" class="px-4 py-2 bg-blue-700 text-white rounded">
         Tambah
     </button>
     <!-- Modal -->

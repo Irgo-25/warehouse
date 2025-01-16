@@ -1,5 +1,5 @@
-<th scope="col" class="border-r py-3" wire:click="sorting('{{$name}}')">
-    <button class="w-full flex items-center justify-between">
+<th scope="col" class="" wire:click="sorting('{{$name}}')">
+    <button class="w-full flex items-center gap-2 ml-2">
         <span>{{$displayName}}</span>
         <div>
             @if ($sortBy !== $name)

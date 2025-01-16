@@ -3,6 +3,7 @@
         <h2 class="text-3xl font-semibold">List Barang Keluar</h2>
     </div>
     @livewire('components.modal-barang-keluar')
+    
     <div class=" py-2 px-2 my-2 rounded-md bg-slate-50">
         {{-- searh and paginate --}}
         <div class=" my-2 flex justify-between">
