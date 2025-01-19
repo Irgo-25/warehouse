@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <x-navbar></x-navbar> 
+    <x-navbar /> 
 
     <x-sidebar />
     <div class="p-4 mt-14 sm:ml-64">

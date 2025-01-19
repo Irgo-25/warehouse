@@ -12,7 +12,7 @@
                 <input wire:model.live.debounce.300ms="search" class="rounded-md" type="text"
                     placeholder="Masukan Kata Kunci">
             </div>
-            {{-- Button dropdown --}}
+            {{-- Button Export --}}
             <button id="dropdownDelayButton" data-dropdown-toggle="dropdownDelay" data-dropdown-delay="3000"
                 data-dropdown-trigger="hover"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -22,7 +22,7 @@
                         d="m1 1 4 4 4-4" />
                 </svg>
             </button>
-            {{-- end button dropdown --}}
+            {{-- end button Export --}}
             <!-- Dropdown menu -->
             <div id="dropdownDelay"
                 class="z-40 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">

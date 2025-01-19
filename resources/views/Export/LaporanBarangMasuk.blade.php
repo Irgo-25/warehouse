@@ -4,27 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Laporan List Barang</title>
+    <title>Laporan Barang Masuk</title>
     <link rel="stylesheet" href="../resources/css/laporan.css">
 </head>
 <body>
-    <H3 class="Heading">Laporan List Barang</H3>
+    <H3 class="Heading">Laporan Barang Masuk</H3>
     <table class="table">
         <thead class="thead">
             <tr>
-                <th>Kode Barang</th>
+                <th>Batch Number</th>
+                <th>Tanggal Masuk</th>
                 <th>Nama Barang</th>
-                <th>Kategori</th>
-                <th>Stock</th>
+                <th>Jumlah Masuk</th>
+                <th>Keterangan</th>
             </tr>
         </thead>
         <tbody class="tbody">
             @foreach ($items as $item)    
             <tr>
-                <td>{{$item->kode_barang}}</td>
-                <td>{{$item->nama_barang}}</td>
-                <td>{{$item->category->kategori}}</td>
-                <td>{{$item->stock}} {{$item->unit->name}}</td>
+                <td>{{$item->id_barang_masuk}}</td>
+                <td>{{$item->tanggal_masuk}}</td>
+                <td>{{$item->barang->nama_barang}}</td>
+                <td>{{$item->jumlah_masuk}} {{$item->unit->name}}</td>
+                <td>{{$item->keterangan}}</td>
             </tr>
             @endforeach
         </tbody>

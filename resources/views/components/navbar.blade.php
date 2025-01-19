@@ -1,5 +1,5 @@
 <div>
-  <nav class="fixed top-0 w-full z-20 bg-[#daa908] border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+  <nav class="fixed top-0 w-full bg-[#daa908] border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
     <div class="px-3 py-4 lg:px-5 lg:pl-3">
       <div class="flex items-center justify-between">
         <div class="flex items-center justify-start rtl:justify-end">

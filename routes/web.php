@@ -17,6 +17,7 @@ use App\Livewire\BarangUnit\ListBarangUnit;
 use App\Livewire\BarangMasuk\EditBarangMasuk;
 use App\Livewire\BarangMasuk\ListBarangMasuk;
 use App\Livewire\BarangKeluar\ListBarangKeluar;
+use App\Livewire\BarangMasuk\LaporanBarangMasuk;
 use App\Livewire\Dasboard;
 
 /*
@@ -64,6 +65,9 @@ Route::middleware(['auth'])->group(function () {
     // Route Product Unit
     Route::get('shcema-unit', ListBarangUnit::class )->name('productUnit');
     
-    // Route Export PDF
-    Route::get('Laporan-List-Barang', [LaporanListBarang::class, 'PdfListBarang'])->name('listBarangPdf');
+    // Route Export List Barang
+    Route::get('laporan-list-barang', [LaporanListBarang::class, 'PdfListBarang'])->name('listBarangPdf');
+
+    // Route Export Barang Masuk
+    Route::get('laporan-barang-masuk', [LaporanBarangMasuk::class, 'export'])->name('barangMasukPDF');
 });

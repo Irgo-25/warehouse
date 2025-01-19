@@ -4,7 +4,7 @@
     </button>
     <!-- Modal -->
     @if ($show)
-    <div class="fixed z-50 overflow-y-auto inset-0 flex items-center justify-center bg-gray-500 bg-opacity-75">
+    <div class="fixed z-30 overflow-y-auto inset-0 flex items-center justify-center bg-gray-500 bg-opacity-75">
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-1/2">
             <div class="p-2">
                 <h3 class="text-2xl">Form Barang Masuk</h3>
@@ -18,7 +18,7 @@
                             <x-input type="text" wire:model="id_barang_masuk" disabled />
                             <div class="text-red-600">@error('id_barang_masuk') {{ $message }} @enderror</div>
                         </div>
-                        <div class="">
+                        <div>
                             <label class="text-base font-medium block mb-2" for="tanggal_masuk">Tanggal Masuk :</label>
                             <div class="relative max-w-sm">
                                 <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">

@@ -1,4 +1,4 @@
-<div class="fixed w-[81%]">
+<div class="absolute w-[81%]">
     <div class="flex justify-between items-center ">
         <h2 class="text-3xl font-semibold">List Barang Masuk</h2>
         @livewire('components.modal-barang-masuk')
@@ -10,35 +10,16 @@
                 <input wire:model.live.debounce.300ms="search" class="rounded-md" type="text"
                     placeholder="Masukan Kata Kunci">
             </div>
-            {{-- Button dropdown --}}
-            <button id="dropdownDelayButton" data-dropdown-toggle="dropdownDelay" data-dropdown-delay="3000"
-                data-dropdown-trigger="hover"
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                type="button">Export <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                    fill="none" viewBox="0 0 10 6">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="m1 1 4 4 4-4" />
-                </svg>
-            </button>
-            {{-- end button dropdown --}}
-            <!-- Dropdown menu -->
-            <div id="dropdownDelay"
-                class="z-40 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDelayButton">
-                    <li>
-                        <a href="{{route('listBarangPdf')}}" target="_blank"
-                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">PDF</a>
-                    </li>
-
-                </ul>
+            {{-- Button Export --}}
+            <div>
+                <livewire:BarangMasuk.LaporanBarangMasuk/>
             </div>
-            {{-- end dropdown menu --}}
+            {{-- end button Export --}}
             {{-- paginate --}}
             <div class="flex space-x-4 items-center mb-3">
                 <label class="w-32 text-sm font-medium text-gray-900">Per Page</label>
                 <select wire:model.live="perPage"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                    <option value="5">5</option>
                     <option value="10">10</option>
                     <option value="20">20</option>
                     <option value="50">50</option>
@@ -50,7 +31,7 @@
         <div class="h-[27rem] scrollbar-hide overflow-y-auto shadow-md sm:rounded-lg">
             <table class="min-w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead
-                    class=" sticky top-0 z-10 text-xs h-11 text-white uppercase bg-[#4535C1] dark:bg-gray-700 dark:text-gray-400">
+                    class=" sticky top-0 text-xs h-11 text-white uppercase bg-[#4535C1] dark:bg-gray-700 dark:text-gray-400">
                     <tr class="text-center">
                         @include('livewire.components.tableheader-sort',[
                         'name' => 'id_barang_masuk',
@@ -81,7 +62,9 @@
                     @forelse ($items as $item)
                     <tr class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600 ">
                         <th scope="row" class="p-4">{{$item->id_barang_masuk}}</th>
-                        <th scope="row" class="p-4">{{$item->tanggal_masuk}}</th>
+                        <th scope="row" class="p-4 font-normal">
+                            {{Carbon\Carbon::parse($item->tanggal_masuk)->translatedFormat('d F Y')}}</td>
+                        </th>
                         <td scope="row" class="p-4"> {{$item->barang->nama_barang}} </td>
                         <td scope="row" class="p-4"> {{$item->jumlah_masuk}} {{$item->unit->name}}
                         </td>
