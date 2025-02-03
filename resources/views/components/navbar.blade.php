@@ -1,5 +1,5 @@
 <div>
-  <nav class="fixed top-0 w-full bg-[#daa908] border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+  <nav class="fixed z-50 top-0 w-full bg-[#daa908] border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
     <div class="px-3 py-4 lg:px-5 lg:pl-3">
       <div class="flex items-center justify-between">
         <div class="flex items-center justify-start rtl:justify-end">
@@ -42,21 +42,6 @@
                 </p>
               </div>
               <ul class="py-1" role="none">
-                <li>
-                  <a href="#"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                    role="menuitem">Dashboard</a>
-                </li>
-                <li>
-                  <a href="#"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                    role="menuitem">Settings</a>
-                </li>
-                <li>
-                  <a href="#"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                    role="menuitem">Earnings</a>
-                </li>
                 <li>
                   <livewire:auth.logout />
                 </li>

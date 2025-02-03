@@ -16,8 +16,13 @@ class AlertToast extends Component
     public $position;
     public function __construct()
     {
-        $this->type = 'success';
-        $this->message = session('success')??session('error');
+        if (session('success')) {
+            $this->type = 'success';
+        }else{
+            $this->type = 'error';
+        }
+        ;
+        $this->message = session('success')?? session('error');
         $this->position = 'top-end';
     }
 

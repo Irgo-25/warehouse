@@ -1,4 +1,5 @@
 <div class="absolute w-[81%]">
+    <x-alert-toast />
     <div class="flex justify-between items-center ">
         <h2 class="text-3xl font-semibold">List Barang Masuk</h2>
         @livewire('components.modal-barang-masuk')
