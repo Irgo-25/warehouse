@@ -13,7 +13,7 @@
             </div>
             {{-- Button Export --}}
             <div>
-                <livewire:BarangMasuk.LaporanBarangMasuk/>
+                @livewire('BarangMasuk.LaporanBarangMasuk')
             </div>
             {{-- end button Export --}}
             {{-- paginate --}}
@@ -27,8 +27,8 @@
                     <option value="100">100</option>
                 </select>
             </div>
-            {{-- end pafinate --}}
         </div>
+        {{-- end pafinate --}}
         <div class="h-[27rem] scrollbar-hide overflow-y-auto shadow-md sm:rounded-lg">
             <table class="min-w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead

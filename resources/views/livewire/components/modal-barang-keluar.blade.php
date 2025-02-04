@@ -1,5 +1,5 @@
 <div>
-    <button wire:click="toogle" class="px-4 py-2 bg-blue-500 text-white rounded">
+    <button wire:click="toogle" class="px-4 py-2 bg-blue-700 text-white rounded">
         Tambah
     </button>
     <!-- Modal -->
@@ -7,19 +7,19 @@
     <div class="fixed z-50 overflow-y-auto inset-0 flex items-center justify-center bg-gray-500 bg-opacity-75">
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-1/2">
             <div class="p-2">
-                <h3 class="text-2xl">Form Barang Masuk</h3>
+                <h3 class="text-2xl">Form Barang Keluar</h3>
             </div>
             <div class="p-2">
                 <form wire:submit.prevent="submit">
                     <div class="grid grid-cols-2 gap-2">
                         <div class="mb-3">
-                            <label class="text-base font-medium block mb-2" for="kode-barang">Batch Barang Masuk
+                            <label class="text-base font-medium block mb-2" for="kode-barang">Batch Barang Keluar
                                 :</label>
                             <x-input type="text" wire:model="id_barang_keluar" disabled />
                             <div class="text-red-600">@error('id_barang_keluar') {{ $message }} @enderror</div>
                         </div>
                         <div class="">
-                            <label class="text-base font-medium block mb-2" for="tanggal_keluar">Tanggal Masuk :</label>
+                            <label class="text-base font-medium block mb-2" for="tanggal_keluar">Tanggal Keluar :</label>
                             <div class="relative max-w-sm">
                                 <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                                     <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
