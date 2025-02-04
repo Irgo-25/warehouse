@@ -40,7 +40,7 @@
                         ])
                         @include('livewire.components.tableheader-sort',[
                         'name' => 'tanggal_keluar',
-                        'displayName'=> 'TANGGAL MASUK'
+                        'displayName'=> 'TANGGAL KELUAR'
                         ])
                         @include('livewire.components.tableheader-sort',[
                         'name' => 'barang_id',
@@ -48,7 +48,7 @@
                         ])
                         @include('livewire.components.tableheader-sort',[
                         'name' => 'jumlah_keluar',
-                        'displayName'=> 'JUMLAH MASUK'
+                        'displayName'=> 'JUMLAH KELUAR'
                         ])
                         @include('livewire.components.tableheader-sort',[
                         'name' => 'keterangan',

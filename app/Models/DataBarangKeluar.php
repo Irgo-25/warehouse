@@ -31,7 +31,7 @@ class DataBarangKeluar extends Model
 
     public function scopeSearch(Builder $query, $value)
     {
-      $query->where('id_barang_keluar', 'like', "%$value%")->orWhere('tanggal_masuk', 'like', "%$value%")->orWhereHas('barang', function ($query) use ($value) {
+      $query->where('id_barang_keluar', 'like', "%$value%")->orWhere('tanggal_keluar', 'like', "%$value%")->orWhereHas('barang', function ($query) use ($value) {
         $query->where('nama_barang', 'like', "%$value%");
       });
     }

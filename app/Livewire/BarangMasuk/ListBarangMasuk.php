@@ -32,9 +32,9 @@ class ListBarangMasuk extends Component
     public function render()
     {
         $items = DataBarangMasuk::with('barang', 'unit')
-                    ->search($this->search)
-                    ->orderBy($this->sortBy, $this->sortDir)
-                    ->paginate($this->perPage);
+            ->search($this->search)
+            ->orderBy($this->sortBy, $this->sortDir)
+            ->paginate($this->perPage);
         return view('livewire.barang-masuk.list-barang-masuk', [
             'items' => $items
         ]);
