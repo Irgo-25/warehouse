@@ -97,7 +97,7 @@ class ModalBarangKeluar extends Component
         $stockMasuk = DataBarang::find($this->selectedbarang);
         $stockMasuk->stock = $this->totalStock;
         $stockMasuk->save();
-        return redirect()->route('listBarangKeluar');
+        return redirect()->route('listBarangKeluar')->with('success', 'Data Berhasil Ditambahkan');
     }
 
     public function render()
