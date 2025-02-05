@@ -9,7 +9,7 @@ class Unit extends Model
 {
     use HasFactory;
 
-    protected $table = 'units';
+    protected $table = 'unit';
     protected $primaryKey = 'id_unit';
     protected $fillable = [
         'name'

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('kode_barang', 25)->primary();
             $table->string('nama_barang',100);
             $table->foreignId('kategori_id')->constrained('kategori','id_kategori');
-            $table->foreignId('unit_id')->constrained('units', 'id_unit');
+            $table->foreignId('unit_id')->constrained('unit', 'id_unit');
             $table->integer('stock')->default(0);
 
             $table->timestamps();

@@ -2,13 +2,13 @@
     <h1 class="text-3xl my-2">Unit Barang</h1>
     <a href="{{route('addUnit')}}" type="button" class="rounded-md p-2 bg-blue-700 text-white text-xs font-bold
         hover:bg-blue-500">Tambah Unit</a>
-        <x-modal-laporan/>
-        <div class=" py-2 my-2">
-          <div class="max-w-3xl ">
-              <div class=" dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                      <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                          <thead class="text-xs text-gray-700 uppercase bg-[#36C2CE] dark:bg-gray-700 dark:text-gray-400 ">
+    <div class=" py-2 my-2">
+        <div class="max-w-3xl ">
+            <div class=" dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <thead
+                            class="text-xs text-gray-700 uppercase bg-[#36C2CE] dark:bg-gray-700 dark:text-gray-400 ">
                             <tr class="text-center">
                                 <th scope="col" class="border-r py-3">
                                     No
@@ -39,13 +39,13 @@
                                         Deleter Unit
                                     </a>
                                 </td>
-                             </tr>
-                             @empty
-                             <td colspan="5">
-                                 <p class="text-lg font-semibold text-center text-black ">Data Unit
-                                     Kosong</p>
-                             </td>
-                             @endforelse
+                            </tr>
+                            @empty
+                            <td colspan="5">
+                                <p class="text-lg font-semibold text-center text-black ">Data Unit
+                                    Kosong</p>
+                            </td>
+                            @endforelse
                             <tr>
                                 <td colspan="5"> {{$units->links()}}</td>
                             </tr>
@@ -55,5 +55,4 @@
             </div>
         </div>
     </div>
- </div>
- 
+</div>

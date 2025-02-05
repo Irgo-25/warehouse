@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('barang_id');
             $table->foreign('barang_id')->references('kode_barang')->on('data_barang');
             $table->integer('jumlah_keluar', false);
-            $table->foreignId('unit_id')->constrained('units', 'id_unit')->nullable();
+            $table->foreignId('unit_id')->constrained('unit', 'id_unit')->nullable();
             $table->string('keterangan');
             $table->timestamps();
         });
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('data_barang_keluars');
+        Schema::dropIfExists('data_barang_keluar');
     }
 };

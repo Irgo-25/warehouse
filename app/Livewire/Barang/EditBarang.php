@@ -52,7 +52,7 @@ class EditBarang extends Component
     {
         $this->validate([
             'kode_barang' => 'required|exists:data_barang,kode_barang',
-            'unit_barang' => 'required|exists:units,id_unit',
+            'unit_barang' => 'required|exists:unit,id_unit',
             'conversion_unit' => 'required|numeric|min:1',
         ]);
 
