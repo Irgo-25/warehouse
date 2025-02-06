@@ -9,6 +9,9 @@ use App\Models\BarangUnit;
 use App\Models\DataBarang;
 use App\Models\DataBarangKeluar;
 
+use function Laravel\Prompts\error;
+use Symfony\Component\Console\Input\Input;
+
 class ModalBarangKeluar extends Component
 {
     public $show = false;
@@ -77,26 +80,28 @@ class ModalBarangKeluar extends Component
             ->value("conversion_unit");
         if (!is_null($this->jumlah_keluar)) {
             $this->totalStock = $this->stock - ($this->jumlah_keluar * $conversion);
-            }
+        }
     }
 
     public function submit()
     {
         // validasi Data
         $this->validate();
-
+        $stockKeluar = DataBarang::find($this->selectedbarang);
+        if ($this->totalStock < 0) {
+            return redirect()->route('listBarangKeluar')->with('error', 'Jumlah yang dimasukkan melebihi stok tersedia');
+        }
         // Simpan Data
         $BarangKeluar = new DataBarangKeluar();
         $BarangKeluar->id_barang_keluar = $this->id_barang_keluar;
         $BarangKeluar->barang_id = $this->selectedbarang;
-        $BarangKeluar->tanggal_keluar= $this->tanggal_keluar;
+        $BarangKeluar->tanggal_keluar = $this->tanggal_keluar;
         $BarangKeluar->jumlah_keluar = $this->jumlah_keluar;
         $BarangKeluar->unit_id = $this->selectedunit;
         $BarangKeluar->keterangan = $this->keterangan;
         $BarangKeluar->save();
-        $stockMasuk = DataBarang::find($this->selectedbarang);
-        $stockMasuk->stock = $this->totalStock;
-        $stockMasuk->save();
+        $stockKeluar->stock = $this->totalStock;
+        $stockKeluar->save();
         return redirect()->route('listBarangKeluar')->with('success', 'Data Berhasil Ditambahkan');
     }
 

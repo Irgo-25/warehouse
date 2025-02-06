@@ -26,7 +26,7 @@ class EditBarang extends Component
     protected $rules = [
         'nama_barang'=>['required'],
         'kategori_id'=>['required', 'exists:kategori,id_kategori'],
-        'unit_id'=>['required', 'exists:units,id_unit'],
+        'unit_id'=>['required', 'exists:unit,id_unit'],
     ];
 
     public function mount($kode_barang){
