@@ -1,5 +1,7 @@
 <?php
 
+use App\Livewire\Dasboard;
+use App\Livewire\Auth\Login;
 use App\Livewire\Unit\AddUnit;
 use App\Livewire\Unit\ListUnit;
 use App\Livewire\User\EditUser;
@@ -12,13 +14,14 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Kategori\EditKategori;
 use App\Livewire\Kategori\CreateKategori;
 use App\Http\Controllers\LaporanListBarang;
-use App\Livewire\Auth\Login;
 use App\Livewire\BarangUnit\ListBarangUnit;
 use App\Livewire\BarangMasuk\EditBarangMasuk;
 use App\Livewire\BarangMasuk\ListBarangMasuk;
+use App\Livewire\Components\ModalBarangKeluar;
 use App\Livewire\BarangKeluar\ListBarangKeluar;
+use App\Livewire\BarangMasuk\FormAddBarangMasuk;
 use App\Livewire\BarangMasuk\LaporanBarangMasuk;
-use App\Livewire\Dasboard;
+use App\Livewire\BarangKeluar\FormAddBarangKeluar;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,9 +57,11 @@ Route::middleware(['auth'])->group(function () {
     // route Barang Masuk
     Route::get('barang-masuk', ListBarangMasuk::class)->name('listBarangMasuk');
     Route::get('edit-barang-masuk/{id_barang_masuk}', EditBarangMasuk::class)->name('editBarangMasuk');
-    
+    Route::get('tambah-barang-masuk', FormAddBarangMasuk::class)->name('addBarangMasuk');
+
     // Route Barang Keluar
     Route::get('barang-keluar', ListBarangKeluar::class)->name('listBarangKeluar');
+    Route::get('tambah-barang-keluar', FormAddBarangKeluar::class)->name('addBarangKeluar');
     
     // Route Unit
     Route::get('unit', ListUnit::class)->name('indexUnit');

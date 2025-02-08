@@ -13,7 +13,7 @@ use Livewire\Attributes\Layout;
 class ListBarangKeluar extends Component
 {
     use WithPagination;
-    public $perPage = 5;
+    public $perPage = 10;
     public $search = null;
     public $sortBy = 'created_at';
     public $sortDir = 'desc';

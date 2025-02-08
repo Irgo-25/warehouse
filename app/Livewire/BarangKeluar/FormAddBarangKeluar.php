@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Components;
+namespace App\Livewire\BarangKeluar;
 
 use Carbon\Carbon;
 use App\Models\Unit;
@@ -11,7 +11,9 @@ use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
 use App\Models\DataBarangKeluar;
 
-class ModalBarangKeluar extends Component
+#[Layout('components.layouts.app')]
+#[Title('Barang Keluar')]
+class FormAddBarangKeluar extends Component
 {
     public $show = false;
     public $items, $unit_id, $unitName, $units = [], $stock = null, $totalStock;
@@ -23,7 +25,7 @@ class ModalBarangKeluar extends Component
         'id_barang_keluar' => ['required'],
         'tanggal_keluar' => ['required', 'date'],
         'selectedbarang' => ['required'],
-        'jumlah_keluar' => ['required', 'integer'],
+        'jumlah_keluar' => ['required', 'integer', 'min:1'],
         'keterangan' => ['required', 'max:220']
     ];
     public function toogle()
@@ -88,8 +90,7 @@ class ModalBarangKeluar extends Component
         $this->validate();
         $stockKeluar = DataBarang::find($this->selectedbarang);
         if ($this->totalStock < 0) {
-            // return back()->with('error', 'Jumlah yang dimasukkan melebihi stok tersedia');
-            return session()->flash('error', 'Jumlah yang dimasukkan melebihi stok tersedia');
+            return redirect()->route('addBarangKeluar')->with('error', 'Jumlah yang dimasukkan melebihi stok tersedia');
         }
         // Simpan Data
         $BarangKeluar = new DataBarangKeluar();
@@ -108,6 +109,6 @@ class ModalBarangKeluar extends Component
     public function render()
     {
         $this->generateCode();
-        return view('livewire.components.modal-barang-keluar');
+        return view('livewire.barang-keluar.form-add-barang-keluar');
     }
 }

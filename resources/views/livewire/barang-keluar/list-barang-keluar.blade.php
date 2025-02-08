@@ -2,7 +2,9 @@
     <x-alert-toast />
     <div class="flex justify-between items-center ">
         <h2 class="text-3xl font-semibold">List Barang Keluar</h2>
-        @livewire('components.modal-barang-keluar')
+        <a href="{{route('addBarangKeluar')}}" type="button" class="px-4 py-2 bg-blue-700 text-white rounded">
+            Tambah
+        </a>
     </div>
     <div class=" py-2 px-2 my-2 h-23 rounded-md h-[35rem] bg-gray-100">
         {{-- searh and paginate --}}

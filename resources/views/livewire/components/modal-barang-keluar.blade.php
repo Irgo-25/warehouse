@@ -1,9 +1,10 @@
 <div>
-    <button wire:click="toogle" class="px-4 py-2 bg-blue-700 text-white rounded">
+    <a href="{{route('addBarangKeluar')}}" wire:click="toogle" class="px-4 py-2 bg-blue-700 text-white rounded">
         Tambah
-    </button>
+    </a>
     <!-- Modal -->
     @if ($show)
+    <x-alert-toast />
     <div class="fixed z-50 overflow-y-auto inset-0 flex items-center justify-center bg-gray-500 bg-opacity-75">
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-1/2">
             <div class="p-2">
@@ -80,11 +81,6 @@
                             <x-input type="number" wire:model="jumlah_keluar"/>
                             <div class="text-red-600">@error('jumlah_keluar') {{ $message }} @enderror</div>
                         </div>
-                        {{-- <div class="mb-3">
-                            <label class="text-base font-medium block mb-2" for="total-stock">Total Stock :</label>
-                            <x-input type="number" wire:model="total_stock" value="{{$totalStock}}" disabled />
-                            <div class="text-red-600">@error('keterangan') {{ $message }} @enderror</div>
-                        </div> --}}
                         <div class="mb-3 col-span-2">
                             <label class="text-base font-medium block mb-2" for="keterangan">Keterangan :</label>
                             <x-input type="text" wire:model="keterangan" placeholder="Masukan Keterangan" />
