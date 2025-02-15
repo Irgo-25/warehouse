@@ -62,7 +62,7 @@
                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-primary-500 focus:ring-primary-500">
                         <option value="">Pilih Unit</option>
                         @foreach($units as $unit)
-                        <option value="{{ $unit->unit_id }}">{{ $unit->unit->name }}
+                        <option value="{{ $unit->id }}">{{ $unit->unit->name }}
                             ({{ $unit->conversion_unit }})</option>
                         @endforeach
                     </select>

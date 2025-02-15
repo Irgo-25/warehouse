@@ -11,7 +11,7 @@ class BarangUnit extends Model
 
     protected $table = 'barang_unit';
     protected $fillable = ['barang_id', 'unit_id', 'conversion_unit'];
-    protected $primaryKey = 'barang_id';
+    // public $primaryKey = 'id';
     protected $casts = [
         'barang_id' => 'string',
         'unit_id' => 'integer'

@@ -7,9 +7,10 @@ use App\Models\Unit;
 use Livewire\Component;
 use App\Models\BarangUnit;
 use App\Models\DataBarang;
+use Livewire\Attributes\Title;
 use App\Models\DataBarangMasuk;
 use Livewire\Attributes\Layout;
-use Livewire\Attributes\Title;
+use Illuminate\Validation\ValidationException;
 
 #[Layout('components.layouts.app')]
 #[Title('Tambah Barang Masuk')]
@@ -25,8 +26,13 @@ class FormAddBarangMasuk extends Component
         'id_barang_masuk' => ['required'],
         'tanggal_masuk' => ['required', 'date'],
         'selectedbarang' => ['required'],
-        'jumlah_masuk' => ['required', 'integer', 'min:1'],
+        'jumlah_masuk' => ['required', 'min:1'],
         'keterangan' => ['required', 'max:220']
+    ];
+    protected $messages = [
+        'selectedunit.required' => 'Unit harus dipilih!',
+        'tanggal_masuk.required' => 'Tanggal masuk tidak boleh kosong!',
+        'jumlah_masuk.required' => 'Jumlah masuk harus berupa angka!',
     ];
     public function updatedSelectedbarang()
     {
@@ -76,27 +82,33 @@ class FormAddBarangMasuk extends Component
             ->value("conversion_unit");
         if (!is_null($this->jumlah_masuk)) {
             $this->totalStock = $this->stock + ($this->jumlah_masuk * $conversion);
-            }
+        }
     }
 
     public function submit()
-    {
-        // validasi Data
-        $this->validate();
-
-        // Simpan Data
-        $BarangMasuk = new DataBarangMasuk();
-        $BarangMasuk->id_barang_masuk = $this->id_barang_masuk;
-        $BarangMasuk->barang_id = $this->selectedbarang;
-        $BarangMasuk->tanggal_masuk = $this->tanggal_masuk;
-        $BarangMasuk->jumlah_masuk = $this->jumlah_masuk;
-        $BarangMasuk->unit_id = $this->selectedunit;
-        $BarangMasuk->keterangan = $this->keterangan;
-        $BarangMasuk->save();
-        $stockMasuk = DataBarang::find($this->selectedbarang);
-        $stockMasuk->stock = $this->totalStock;
-        $stockMasuk->save();
-        return redirect()->route('listBarangMasuk')->with('success', 'Data Berhasil Ditambahkan');
+    {        
+        try {
+            $this->validate();
+            $BarangMasuk = new DataBarangMasuk();
+            $BarangMasuk->id_barang_masuk = $this->id_barang_masuk;
+            $BarangMasuk->barang_id = $this->selectedbarang;
+            $BarangMasuk->tanggal_masuk = $this->tanggal_masuk;
+            $BarangMasuk->jumlah_masuk = $this->jumlah_masuk;
+            $BarangMasuk->unit_id = $this->selectedunit;
+            $BarangMasuk->keterangan = $this->keterangan;
+            $BarangMasuk->save();
+            $stockMasuk = DataBarang::find($this->selectedbarang);
+            $stockMasuk->stock = $this->totalStock;
+            $stockMasuk->save();
+            return redirect()->route('listBarangMasuk')->with('success', 'Data Berhasil Ditambahkan');
+        } catch (ValidationException $e) {
+            $this->reset(['selectedunit', 'jumlah_masuk']);
+            foreach ($e->validator->errors()->messages() as $key => $messages) {
+                foreach ($messages as $message) {
+                    $this->addError($key, $message);
+                }
+            }
+        }
     }
     public function render()
     {

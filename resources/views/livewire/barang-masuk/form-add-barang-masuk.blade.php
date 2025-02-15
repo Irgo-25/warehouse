@@ -56,7 +56,7 @@
                 <div class="mb-3">
                     <label for="selectedunit" class="block mb-3 text-sm font-medium text-gray-700">Unit
                         Konversi</label>
-                    <select wire:model="selectedunit" id="selectedunit" required
+                    <select wire:model="selectedunit" id="selectedunit"
                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500">
                         <option value="">Pilih Unit</option>
                         @foreach($units as $unit)

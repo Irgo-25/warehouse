@@ -10,6 +10,7 @@ use App\Models\DataBarang;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
 use App\Models\DataBarangKeluar;
+use Illuminate\Validation\ValidationException;
 
 #[Layout('components.layouts.app')]
 #[Title('Barang Keluar')]
@@ -27,6 +28,11 @@ class FormAddBarangKeluar extends Component
         'selectedbarang' => ['required'],
         'jumlah_keluar' => ['required', 'integer', 'min:1'],
         'keterangan' => ['required', 'max:220']
+    ];
+    protected $messages = [
+        'selectedunit.required' => 'Unit harus dipilih!',
+        'tanggal_keluar.required' => 'Tanggal keluar tidak boleh kosong!',
+        'jumlah_keluar.required' => 'Jumlah keluar tidak boleh kosong!',
     ];
     public function toogle()
     {
@@ -77,7 +83,7 @@ class FormAddBarangKeluar extends Component
     public function updatedJumlahkeluar($conversion)
     {
         $conversion = BarangUnit::where('barang_id', $this->selectedbarang)
-            ->where('unit_id', $this->selectedunit)
+            ->where('id', $this->selectedunit)
             ->value("conversion_unit");
         if (!is_null($this->jumlah_keluar)) {
             $this->totalStock = $this->stock - ($this->jumlah_keluar * $conversion);
@@ -86,24 +92,33 @@ class FormAddBarangKeluar extends Component
 
     public function submit()
     {
-        // validasi Data
-        $this->validate();
-        $stockKeluar = DataBarang::find($this->selectedbarang);
-        if ($this->totalStock < 0) {
-            return redirect()->route('addBarangKeluar')->with('error', 'Jumlah yang dimasukkan melebihi stok tersedia');
-        }
-        // Simpan Data
-        $BarangKeluar = new DataBarangKeluar();
-        $BarangKeluar->id_barang_keluar = $this->id_barang_keluar;
-        $BarangKeluar->barang_id = $this->selectedbarang;
-        $BarangKeluar->tanggal_keluar = $this->tanggal_keluar;
-        $BarangKeluar->jumlah_keluar = $this->jumlah_keluar;
-        $BarangKeluar->unit_id = $this->selectedunit;
-        $BarangKeluar->keterangan = $this->keterangan;
-        $BarangKeluar->save();
-        $stockKeluar->stock = $this->totalStock;
-        $stockKeluar->save();
-        return redirect()->route('listBarangKeluar')->with('success', 'Data Berhasil Ditambahkan');
+        try{
+            // validasi Data
+            $this->validate();
+            $stockKeluar = DataBarang::find($this->selectedbarang);
+            if ($this->totalStock < 0) {
+                return redirect()->route('addBarangKeluar')->with('error', 'Jumlah yang dimasukkan melebihi stok tersedia');
+            }
+            // Simpan Data
+            $BarangKeluar = new DataBarangKeluar();
+            $BarangKeluar->id_barang_keluar = $this->id_barang_keluar;
+            $BarangKeluar->barang_id = $this->selectedbarang;
+            $BarangKeluar->tanggal_keluar = $this->tanggal_keluar;
+            $BarangKeluar->jumlah_keluar = $this->jumlah_keluar;
+            $BarangKeluar->unit_id = $this->selectedunit;
+            $BarangKeluar->keterangan = $this->keterangan;
+            $BarangKeluar->save();
+            $stockKeluar->stock = $this->totalStock;
+            $stockKeluar->save();
+            return redirect()->route('listBarangKeluar')->with('success', 'Data Berhasil Ditambahkan');
+        }catch(ValidationException $e){
+            $this->reset(['selectedunit', 'jumlah_keluar']);
+            foreach ($e->validator->errors()->messages() as $key => $messages) {
+                foreach ($messages as $message) {
+                    $this->addError($key,$message);
+                }
+            }
+        };
     }
 
     public function render()
