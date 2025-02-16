@@ -13,40 +13,20 @@ use Livewire\Attributes\Layout;
 #[Title('List Schema Unit')]
 class ListBarangUnit extends Component
 {
-    public $items;
-    public $units;
-    public $barang_id;
-    public $unit_id;
-    public $conversion_unit;
+    public $kode_barang;
 
-    public function mount()
-    {
-        $this->items = DataBarang::all();
-        $this->units = Unit::all();
+    public function mount($kode_barang){
+        $Barang = DataBarang::findOrFail($kode_barang);
+        $this->kode_barang = $Barang->kode_barang;
     }
-    // public function loadData()
-    // {
-    //     $this->barangUnits = BarangUnit::with('barang', 'unit')->get();
-    // }
-    public function store()
-    {
-        $this->validate([
-            'barang_id' => 'required|exists:data_barang,kode_barang',
-            'unit_id' => 'required|exists:units,id_unit',
-            'conversion_unit' => 'required|numeric|min:1',
-        ]);
-
-        $barangUnit = new BarangUnit();
-        $barangUnit->barang_id = $this->barang_id;
-        $barangUnit->unit_id = $this->unit_id;
-        $barangUnit->conversion_unit = $this->conversion_unit;
-        $barangUnit->save();
-        $this->reset('barang_id', 'unit_id', 'conversion_unit');
-
+    public function listBarangUnit(){
+        $items = BarangUnit::where('barang_id', $this->kode_barang)->with('unit')->get();
+        return $items;
     }
+
     public function render()
     {
-
-        return view('livewire.barang-unit.list-barang-unit');
+        $items = $this->listBarangUnit($this->kode_barang);
+        return view('livewire.barang-unit.list-barang-unit', compact('items'));
     }
 }

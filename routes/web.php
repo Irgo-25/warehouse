@@ -17,10 +17,8 @@ use App\Http\Controllers\LaporanListBarang;
 use App\Livewire\BarangUnit\ListBarangUnit;
 use App\Livewire\BarangMasuk\EditBarangMasuk;
 use App\Livewire\BarangMasuk\ListBarangMasuk;
-use App\Livewire\Components\ModalBarangKeluar;
 use App\Livewire\BarangKeluar\ListBarangKeluar;
 use App\Livewire\BarangMasuk\FormAddBarangMasuk;
-use App\Livewire\BarangMasuk\LaporanBarangMasuk;
 use App\Livewire\BarangKeluar\FormAddBarangKeluar;
 
 /*

@@ -65,16 +65,16 @@ class EditBarang extends Component
 
     }
 
-    public function listBarangUnit(){
-        $items = BarangUnit::where('barang_id', $this->kode_barang)->with('unit')->get();
-        return $items;
-    }
+    // public function listBarangUnit(){
+    //     $items = BarangUnit::where('barang_id', $this->kode_barang)->with('unit')->get();
+    //     return $items;
+    // }
 
     public function render()
     {
-        $items = $this->listBarangUnit($this->kode_barang);
+        // $items = $this->listBarangUnit($this->kode_barang);
         $kategoris = Kategori::all();
         $units = Unit::all();
-        return view('livewire.barang.edit-barang',compact('kategoris', 'units', 'items'));
+        return view('livewire.barang.edit-barang',compact('kategoris', 'units'));
     }
 }
