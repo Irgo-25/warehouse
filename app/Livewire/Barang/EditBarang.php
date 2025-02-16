@@ -16,7 +16,6 @@ use Livewire\Attributes\Layout;
 class EditBarang extends Component
 {
     public $barang_id;
-    public $conversion_unit;
     public $kode_barang;
     public $nama_barang;
     public $kategori_id;
@@ -47,28 +46,6 @@ class EditBarang extends Component
         $Barang->save();
         return redirect()->route('listBarang');
     }
-
-    public function storeBarangUnit()
-    {
-        $this->validate([
-            'kode_barang' => 'required|exists:data_barang,kode_barang',
-            'unit_barang' => 'required|exists:unit,id_unit',
-            'conversion_unit' => 'required|numeric|min:1',
-        ]);
-
-        $barangUnit = new BarangUnit();
-        $barangUnit->barang_id = $this->kode_barang;
-        $barangUnit->unit_id = $this->unit_barang;
-        $barangUnit->conversion_unit = $this->conversion_unit;
-        $barangUnit->save();
-        $this->reset('conversion_unit');
-
-    }
-
-    // public function listBarangUnit(){
-    //     $items = BarangUnit::where('barang_id', $this->kode_barang)->with('unit')->get();
-    //     return $items;
-    // }
 
     public function render()
     {

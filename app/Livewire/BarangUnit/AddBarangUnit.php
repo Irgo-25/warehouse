@@ -9,7 +9,8 @@ use App\Models\DataBarang;
 
 class AddBarangUnit extends Component
 {
-    public $kode_barang, $conversion_unit, $unit_barang;
+
+    public $barangUnits, $kode_barang, $conversion_unit, $unit_barang;
 
     public function mount($kode_barang)
     {
@@ -29,6 +30,9 @@ class AddBarangUnit extends Component
         $barangUnit->conversion_unit = $this->conversion_unit;
         $barangUnit->save();
         $this->reset('conversion_unit');
+
+        // Kirim event agar daftar unit barang diperbarui
+        $this->dispatch('refreshBarangUnit');
     }
     public function render()
     {

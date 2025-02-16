@@ -2,10 +2,8 @@
 
 namespace App\Livewire\BarangUnit;
 
-use App\Models\Unit;
 use Livewire\Component;
 use App\Models\BarangUnit;
-use App\Models\DataBarang;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
 
@@ -15,13 +13,40 @@ class ListBarangUnit extends Component
 {
     public $kode_barang;
 
-    public function mount($kode_barang){
-        $Barang = DataBarang::findOrFail($kode_barang);
-        $this->kode_barang = $Barang->kode_barang;
+    // edit
+    public $barangUnitId, $conversion_unit;
+    protected $listeners = ['refreshBarangUnit' => 'listBarangUnit'];
+
+    public function mount($kode_barang)
+    {
+        $this->kode_barang = $kode_barang;
+    }
+
+    public function edit($barangUnitID){
+        $this->barangUnitId = $barangUnitID;
+        $this->conversion_unit = BarangUnit::find($barangUnitID)->conversion_unit; 
+    }
+
+    public function update(){
+        $this->validate([
+            'conversion_unit' => 'required|numeric|min:1',
+        ]);
+        $BarangUnit = BarangUnit::find($this->barangUnitId);
+        $BarangUnit->conversion_unit = $this->conversion_unit;
+        $BarangUnit->update();
+        $this->reset('barangUnitId');
+    }
+    public function cancelEdit(){
+        $this->reset(['barangUnitId','conversion_unit']);
     }
     public function listBarangUnit(){
         $items = BarangUnit::where('barang_id', $this->kode_barang)->with('unit')->get();
         return $items;
+    }
+
+    public function delete($barangUnitID)
+    {
+        BarangUnit::destroy($barangUnitID);
     }
 
     public function render()
