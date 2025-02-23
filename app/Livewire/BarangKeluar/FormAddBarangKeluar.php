@@ -34,13 +34,27 @@ class FormAddBarangKeluar extends Component
         'tanggal_keluar.required' => 'Tanggal keluar tidak boleh kosong!',
         'jumlah_keluar.required' => 'Jumlah keluar tidak boleh kosong!',
     ];
-    public function toogle()
+
+    public function updatedSelectedbarang()
     {
-        $this->show = !$this->show;
+        $dataBarangs = DataBarang::where('kode_barang', $this->selectedbarang)->first();
+        if ($dataBarangs) {
+            $this->stock = $dataBarangs->stock;
+            $this->unit_id = $dataBarangs->unit_id; // Ambil unit_id
+        }
+        $this->unitName = Unit::where('id_unit', $this->unit_id)->value('name');
+        $this->units = BarangUnit::where('barang_id', $this->selectedbarang)->get();
+        // Reset properti yang berhubungan
+        $this->selectedunit = null;
+        $this->jumlah_keluar = null;
+        $this->totalStock = null;
+
+        // Ambil data stock baru berdasarkan barang_id yang baru
     }
 
     public function mount()
     {
+        $this->generateCode();
         $this->items = DataBarang::all();
     }
     public function generateCode()
@@ -63,27 +77,11 @@ class FormAddBarangKeluar extends Component
         $getCode = str_pad($setCode, 4, "0", STR_PAD_LEFT);
         $this->id_barang_keluar = "IK-$tanggal$bulan$tahun-$getCode";
     }
-    public function updatedSelectedbarang()
-    {
-        $dataBarangs = DataBarang::where('kode_barang', $this->selectedbarang)->first();
-        if ($dataBarangs) {
-            $this->stock = $dataBarangs->stock;
-            $this->unit_id = $dataBarangs->unit_id; // Ambil unit_id
-        }
-        $this->unitName = Unit::where('id_unit', $this->unit_id)->value('name');
-        $this->units = BarangUnit::where('barang_id', $this->selectedbarang)->get();
-        // Reset properti yang berhubungan
-        $this->selectedunit = null;
-        $this->jumlah_keluar = null;
-        $this->totalStock = null;
-
-        // Ambil data stock baru berdasarkan barang_id yang baru
-    }
 
     public function updatedJumlahkeluar($conversion)
     {
         $conversion = BarangUnit::where('barang_id', $this->selectedbarang)
-            ->where('id', $this->selectedunit)
+            ->where('unit_id', $this->selectedunit)
             ->value("conversion_unit");
         if (!is_null($this->jumlah_keluar)) {
             $this->totalStock = $this->stock - ($this->jumlah_keluar * $conversion);
@@ -95,7 +93,6 @@ class FormAddBarangKeluar extends Component
         try{
             // validasi Data
             $this->validate();
-            $stockKeluar = DataBarang::find($this->selectedbarang);
             if ($this->totalStock < 0) {
                 return redirect()->route('addBarangKeluar')->with('error', 'Jumlah yang dimasukkan melebihi stok tersedia');
             }
@@ -108,6 +105,7 @@ class FormAddBarangKeluar extends Component
             $BarangKeluar->unit_id = $this->selectedunit;
             $BarangKeluar->keterangan = $this->keterangan;
             $BarangKeluar->save();
+            $stockKeluar = DataBarang::find($this->selectedbarang);
             $stockKeluar->stock = $this->totalStock;
             $stockKeluar->save();
             return redirect()->route('listBarangKeluar')->with('success', 'Data Berhasil Ditambahkan');
@@ -123,7 +121,7 @@ class FormAddBarangKeluar extends Component
 
     public function render()
     {
-        $this->generateCode();
+
         return view('livewire.barang-keluar.form-add-barang-keluar');
     }
 }

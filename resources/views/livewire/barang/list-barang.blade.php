@@ -1,4 +1,4 @@
-<div class="fixed w-[81%]">
+<div class="fixed w-[95%] md:w-[81%]">
     <div class="flex justify-between items-center">
         <h2 class="text-3xl font-semibold">List Barang</h2>
         @livewire('components.modal-barang')

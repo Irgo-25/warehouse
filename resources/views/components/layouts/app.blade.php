@@ -10,11 +10,11 @@
     @livewireStyles
 </head>
 
-<body>
+<body class="bg-slate-100">
     <x-navbar /> 
 
     <x-sidebar />
-    <div class="p-4 mt-14 sm:ml-64">
+    <div class="p-4 mt-16 md:mt-14 mx-auto md:ml-64">
         {{ $slot }}
     </div>
     @livewireScripts

@@ -1,4 +1,4 @@
-<div class="absolute w-[81%]">
+<div class="fixed w-[95%] md:w-[81%]">
     <x-alert-toast />
     <div class="flex justify-between items-center ">
         <h2 class="text-3xl font-semibold">List Barang Keluar</h2>
@@ -6,7 +6,7 @@
             Tambah
         </a>
     </div>
-    <div class=" py-2 px-2 my-2 h-23 rounded-md h-[35rem] bg-gray-100">
+    <div class=" py-2 px-2 my-2 h-23 rounded-md shadow-lg h-[35rem] bg-white">
         {{-- searh and paginate --}}
         <div class=" flex justify-between items-center">
             <div>

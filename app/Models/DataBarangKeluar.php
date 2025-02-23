@@ -15,7 +15,8 @@ class DataBarangKeluar extends Model
     public $incrementing = false;
   
     public $casts = [
-      'barang_id' => 'string'
+      'barang_id' => 'string',
+      'unit_id' => 'integer'
       
     ];
     protected $fillable = ['id_barang_keluar', 'tanggal_keluar', 'barang_id', 'jumlah_keluar', 'keterangan'];
