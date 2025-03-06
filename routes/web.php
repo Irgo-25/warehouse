@@ -40,16 +40,17 @@ Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', Dasboard::class)->name('dashboard');
     // user
     Route::get('user', IndexUser::class)->name('user');
-    Route::get('create-user', CreateUser::class)->name('createUser');
+    Route::get('tambah-user', CreateUser::class)->name('createUser');
     Route::get('edit-user/{id}', EditUser::class)->name('editUser');
     
     //route kategori
     Route::get('kategori-barang', Kategori::class)->name('kategoriBarang');
-    Route::get('kategori-barang/create', CreateKategori::class)->name('addKategori');
-    Route::get('kategori-barang/edit/{id_kategori}', EditKategori::class)->name('editKategori');
+    Route::get('tambah-kategori', CreateKategori::class)->name('addKategori');
+    Route::get('edit-kategori/{id_kategori}', EditKategori::class)->name('editKategori');
     
-    // route ListBarang
+    // route Barang
     Route::get('list-barang', ListBarang::class)->name('listBarang');
+    Route::get('');
     Route::get('edit-barang/{kode_barang}', EditBarang::class)->name('editBarang');
     
     // route Barang Masuk

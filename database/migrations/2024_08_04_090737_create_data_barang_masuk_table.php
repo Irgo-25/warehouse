@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('id_barang_masuk', 25)->primary();
             $table->date('tanggal_masuk')->format('d/m/Y');
             $table->string('barang_id');
-            $table->foreign('barang_id')->references('kode_barang')->on('data_barang');
+            $table->foreign('barang_id')->references('kode_barang')->on('data_barang')->cascadeOnDelete()->cascadeOnUpdate();
             $table->integer('jumlah_masuk', false);
             $table->foreignId('unit_id')->constrained('unit', 'id_unit')->nullable();
             $table->string('keterangan');
