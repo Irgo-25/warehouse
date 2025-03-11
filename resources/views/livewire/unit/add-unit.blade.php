@@ -2,6 +2,7 @@
     <h2 class="text-3xl font-semibold">Form Unit</h2>
     <x-label-form>
         <form wire:submit="storeUnit">
+            @csrf
             <div class="mb-5" id="input-fields">
                 <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Default
                     Unit :</label>

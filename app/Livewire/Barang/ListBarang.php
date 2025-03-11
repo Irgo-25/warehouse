@@ -18,11 +18,15 @@ class ListBarang extends Component
     public $sortBy = 'created_at';
     public $sortDir = 'desc';
     public $perPage = 5;
-
+    protected $listeners = ['deleteConfirmed' => 'delete'];
 
     public function delete($kode_barang)
     {
-        DataBarang::destroy($kode_barang);
+        $item = DataBarang::where('kode_barang', $kode_barang)->first();
+        if ($item) {
+            $item->delete();
+            $this->dispatch('swal:deleted');
+        }
     }
     public function sorting($setColumn)
     {

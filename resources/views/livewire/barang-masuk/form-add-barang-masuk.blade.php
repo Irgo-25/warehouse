@@ -4,6 +4,7 @@
     </div>
     <div class="p-2">
         <form wire:submit.prevent="submit">
+            @csrf
             <div class="grid grid-cols-2 gap-3">
                 <div class="mb-3">
                     <label class="text-base font-medium block mb-2" for="kode-barang">Batch Barang Masuk:</label>
@@ -13,30 +14,20 @@
                 <div>
                     <label class="text-base font-medium block mb-2" for="tanggal_masuk">Tanggal Masuk:</label>
                     <div class="relative">
-                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                <path
-                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                            </svg>
-                        </div>
-                        <input wire:model="tanggal_masuk" type="Date"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Pilih Tanggal Masuk">
+                        <x-input wire:model="tanggal_masuk" type="Date"/>
                     </div>
                     <div class="text-red-600">@error('tanggal_masuk') {{ $message }} @enderror</div>
                 </div>
                 <div class="mb-3">
                     <label for="Barang"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Barang</label>
-                    <select id="barang" wire:model.live="selectedbarang"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                    <x-select-form id="barang" wire:model.live="selectedbarang">
                         <option value="">Pilih Barang</option>
                         @foreach ($items as $item)
                         <option value="{{ $item->kode_barang }}">{{ $item->kode_barang }} ||
                             {{ $item->nama_barang }}</option>
                         @endforeach
-                    </select>
+                    </x-select-form>
                     <div class="text-red-600">@error('barang_id') {{ $message }} @enderror</div>
                 </div>
                 <div class="mb-3">
@@ -56,14 +47,13 @@
                 <div class="mb-3">
                     <label for="selectedunit" class="block mb-3 text-sm font-medium text-gray-700">Unit
                         Konversi</label>
-                    <select wire:model="selectedunit" id="selectedunit"
-                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500">
+                    <x-select-form wire:model="selectedunit" id="selectedunit">
                         <option value="">Pilih Unit</option>
                         @foreach($units as $unit)
                         <option value="{{ $unit->unit_id }}">{{ $unit->unit->name }}
                             ({{ $unit->conversion_unit }})</option>
                         @endforeach
-                    </select>
+                    </x-select-form>
                     <div class="text-red-600">@error('barang_id') {{ $message }} @enderror</div>
                 </div>
                 <div class="mb-3">

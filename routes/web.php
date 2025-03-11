@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Kategori\EditKategori;
 use App\Livewire\Kategori\CreateKategori;
 use App\Http\Controllers\LaporanListBarang;
+use App\Livewire\Barang\FormBarang;
 use App\Livewire\BarangUnit\ListBarangUnit;
 use App\Livewire\BarangMasuk\EditBarangMasuk;
 use App\Livewire\BarangMasuk\ListBarangMasuk;
@@ -50,13 +51,13 @@ Route::middleware(['auth'])->group(function () {
     
     // route Barang
     Route::get('list-barang', ListBarang::class)->name('listBarang');
-    Route::get('');
+    Route::get('tambah-barang', FormBarang::class)->name('addBarang');
     Route::get('edit-barang/{kode_barang}', EditBarang::class)->name('editBarang');
     
     // route Barang Masuk
     Route::get('barang-masuk', ListBarangMasuk::class)->name('listBarangMasuk');
-    Route::get('edit-barang-masuk/{id_barang_masuk}', EditBarangMasuk::class)->name('editBarangMasuk');
     Route::get('tambah-barang-masuk', FormAddBarangMasuk::class)->name('addBarangMasuk');
+    Route::get('edit-barang-masuk/{id_barang_masuk}', EditBarangMasuk::class)->name('editBarangMasuk');
 
     // Route Barang Keluar
     Route::get('barang-keluar', ListBarangKeluar::class)->name('listBarangKeluar');
@@ -64,7 +65,7 @@ Route::middleware(['auth'])->group(function () {
     
     // Route Unit
     Route::get('unit', ListUnit::class)->name('indexUnit');
-    Route::get('unit/create', AddUnit::class)->name('addUnit');
+    Route::get('tambah-unit', AddUnit::class)->name('addUnit');
     
     // Route Product Unit
     Route::get('shcema-unit', ListBarangUnit::class )->name('productUnit');

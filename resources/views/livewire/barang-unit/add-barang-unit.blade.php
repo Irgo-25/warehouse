@@ -3,6 +3,7 @@
         <h3 class="text-2xl font-semibold ">Add Schema Unit</h3>
     </div>
     <form wire:submit="storeBarangUnit">
+        @csrf
         <div class="flex gap-3">
             <div>
                 <label for="barang"
