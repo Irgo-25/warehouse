@@ -13,6 +13,26 @@ use Livewire\Attributes\Layout;
 class ListUnit extends Component
 {
     use WithPagination;
+
+    public $unitID, $name;
+
+    public function edit($unitID){
+        $this->unitID = $unitID;
+        $this->name = Unit::find($unitID)->name;
+    }
+    public function update(){
+        $this->validate([
+            "name"=> "required"
+        ]);
+        $editUnit = Unit::findOrFail($this->unitID);
+        $editUnit->name = $this->name;
+        $editUnit->update();
+        $this->reset("unitID");
+    }
+
+    public function cancelEdit(){
+        $this->reset(["unitID","name"]);
+    }
     public function delete($id_unit){
         Unit::destroy($id_unit);
 
