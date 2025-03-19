@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('barang_id');
             $table->foreign('barang_id')->references('kode_barang')->on('data_barang')->cascadeOnDelete()->cascadeOnUpdate();
             $table->integer('jumlah_keluar', false);
-            $table->foreignId('unit_id')->constrained('unit', 'id_unit')->nullable();
+            $table->foreignId('unit_id')->nullable()->constrained('unit', 'id_unit')->nullOnDelete()->cascadeOnUpdate();
             $table->string('keterangan');
             $table->timestamps();
         });

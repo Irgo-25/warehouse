@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('data_barang', function (Blueprint $table) {
             $table->string('kode_barang', 25)->primary();
             $table->string('nama_barang',100);
-            $table->foreignId('kategori_id')->constrained('kategori','id_kategori');
-            $table->foreignId('unit_id')->constrained('unit', 'id_unit');
+            $table->foreignId('kategori_id')->nullable()->constrained('kategori','id_kategori')->nullOnDelete()->cascadeOnUpdate();
+            $table->foreignId('unit_id')->nullable()->constrained('unit', 'id_unit')->nullOnDelete()->cascadeOnUpdate();
             $table->integer('stock')->default(0);
 
             $table->timestamps();

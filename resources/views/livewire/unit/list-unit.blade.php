@@ -27,13 +27,13 @@
                                 @if ($unitID == $unit->id_unit)
                                 <td class="p-2">
                                     <input type="text" id="name" wire:model="name"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-32 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                         placeholder="Default Unit">
                                     <div class="text-red-600">@error('name') {{ $message }} @enderror</div>
                                     <button wire:click="update" id="btn"
-                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm mt-2 px-2 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Simpan</button>
-                                <button wire:click="cancelEdit" id="btn"
-                                    class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm mt-2 px-2 py-1.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-blue-800">batal</button>
+                                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm mt-2 px-2 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Simpan</button>
+                                    <button wire:click="cancelEdit" id="btn"
+                                        class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm mt-2 px-2 py-1.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-blue-800">batal</button>
                                 </td>
                                 @else
                                 <td scope="row" class="border-b">{{$unit->name}}</td>
@@ -45,12 +45,12 @@
                                         type="button">
                                         Edit Unit
                                     </button>
-                                    <a href="" wire:click.prevent="delete('{{$unit->id_unit}}')" class=" text-white bg-red-700 hover:bg-red-800 focus:ring-4
+                                    <button data-id-unit="{{$unit->id_unit}}" class="delete-btn text-white bg-red-700 hover:bg-red-800 focus:ring-4
                                         focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-2
                                         text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
                                         type="button">
                                         Deleter Unit
-                                    </a>
+                                    </button>
                                 </td>
                             </tr>
                             @empty
@@ -68,4 +68,43 @@
             </div>
         </div>
     </div>
+    <template id="my-template">
+        <swal-title>
+            Yakin Ingin Menghapus??
+        </swal-title>
+        <swal-icon type="warning" color="red"></swal-icon>
+        <swal-button type="confirm" color="red">
+            Delete
+        </swal-button>
+        <swal-button type="cancel">
+            Cancel
+        </swal-button>
+        <swal-param name="allowEscapeKey" value="false" />
+        <swal-param name="customClass" value='{ "popup": "my-popup" }' />
+        <swal-function-param name="didOpen" value="popup => console.log(popup)" />
+    </template>
+    <script type="module">
+        document.addEventListener('DOMContentLoaded', function() {
+            // Swal.bindClickHandler("data-swal-template")
+
+            document.querySelectorAll('.delete-btn').forEach(button => {
+                button.addEventListener('click', function(){
+                    const id_unit = this.getAttribute("data-id-unit");
+                    Swal.fire({
+                       template: "#my-template",
+                    }).then((result)=>{
+                        if(result.isConfirmed){
+                            Livewire.dispatch('deleteConfirmed', {id_unit});
+                            // console.log("Test");
+                        }
+                    });
+                    
+                    
+                });
+            });
+            Livewire.on('swal:deleted', () => {
+            Swal.fire('Dihapus!', 'Data telah dihapus.', 'success');
+            });
+        });
+    </script>
 </div>

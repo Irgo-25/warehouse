@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('barang_id');
             $table->foreign('barang_id')->references('kode_barang')->on('data_barang')->cascadeOnDelete();
-            $table->foreignId('unit_id')->constrained('unit', 'id_unit')->cascadeOnDelete();
+            $table->foreignId('unit_id')->constrained('unit', 'id_unit')->cascadeOnDelete()->cascadeOnUpdate();
             $table->integer('conversion_unit');
             $table->timestamps();
         });

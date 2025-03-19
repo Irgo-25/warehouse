@@ -14,8 +14,36 @@ class Kategori extends Component
 {
     use WithPagination;
 
+    public $kategoriID, $kategori;
+    protected $listeners = ["deleteConfirmed" => "delete"];
+    public function edit($kategoriID){
+        $this->kategoriID = $kategoriID;
+        $this->kategori = ModelsKategori::find($kategoriID)->kategori;
+    }
+
+    public function update(){
+        $this->validate([
+            "kategori" => "required"
+        ]);
+        $editKategori = ModelsKategori::findOrFail($this->kategoriID);
+        $editKategori->kategori = $this->kategori;
+        $editKategori->update();
+        $this->reset("kategoriID");
+
+    }
+
+    public function cancelEdit(){
+        $this->reset([
+            "kategoriID",
+            "kategori"
+        ]);
+    }
     public function delete($id_kategori){
-        ModelsKategori::destroy($id_kategori);
+        $kategori = ModelsKategori::where('id_kategori', $id_kategori)->first();
+        if ($kategori) {
+            $kategori->delete();
+            $this->dispatch('swal:deleted');
+        }
     }
 
     public function render()

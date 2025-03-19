@@ -69,7 +69,7 @@
                             {{Carbon\Carbon::parse($item->tanggal_masuk)->translatedFormat('d F Y')}}</td>
                         </th>
                         <td scope="row" class="p-4"> {{$item->barang->nama_barang}} </td>
-                        <td scope="row" class="p-4"> {{$item->jumlah_masuk}} {{$item->unit->name}}
+                        <td scope="row" class="p-4"> {{$item->jumlah_masuk}} {{$item->unit->name ?? ""}}
                         </td>
                         <td scope="row" class="p-4">{{$item->keterangan}}</td>
                         <td class="py-4 border-b text-center flex">

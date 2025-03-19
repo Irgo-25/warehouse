@@ -15,6 +15,7 @@ class ListUnit extends Component
     use WithPagination;
 
     public $unitID, $name;
+    protected $listeners = ['deleteConfirmed' => 'delete'];
 
     public function edit($unitID){
         $this->unitID = $unitID;
@@ -33,9 +34,13 @@ class ListUnit extends Component
     public function cancelEdit(){
         $this->reset(["unitID","name"]);
     }
-    public function delete($id_unit){
-        Unit::destroy($id_unit);
-
+    public function delete($id_unit)
+    {
+        $unit = Unit::where('id_unit', $id_unit)->first();
+        if ($unit) {
+            $unit->delete();
+            $this->dispatch('swal:deleted');
+        }
     }
     public function render()
     {
