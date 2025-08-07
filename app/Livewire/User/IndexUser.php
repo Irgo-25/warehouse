@@ -14,19 +14,35 @@ class IndexUser extends Component
     use WithPagination;
 
     #[Title('User')]
+    public $sortBy = 'created_at';
+    public $sortDir = 'desc';
     public $perPage = 5;
     public $search;
-
-    public function render()
+    protected $listeners = ['deleteConfirmed' => 'delete'];
+    public function sorting($setColumn)
     {
-        $users = User::with('role')->search($this->search)->paginate($this->perPage);
-        return view('livewire.user.index-user', [
-            'users' => $users,
-        ]);
+        if ($this->sortBy == $setColumn) {
+            $this->sortDir = ($this->sortDir == 'desc') ? 'asc' : 'desc';
+            return;
+        }
+        $this->sortBy = $setColumn;
     }
 
     public function delete($id)
     {
-        User::destroy($id);
+        $user = User::where('id', $id)->first();
+        if ($user) {
+            $user->delete();
+            $this->dispatch('swal:deleted');
+        }
+    }
+    public function render()
+    {
+        $users = User::with('role')->search($this->search)
+        ->orderBy($this->sortBy, $this->sortDir)
+        ->paginate($this->perPage);
+        return view('livewire.user.index-user', [
+            'users' => $users,
+        ]);
     }
 }

@@ -1,8 +1,8 @@
 <div class="fixed w-[95%] md:w-[81%]">
     <div class="flex justify-between items-center">
         <h1 class="text-xl my-2 font-semibold">User</h1>
-        <a href="{{route('createUser')}}" type="button" class="rounded-md p-2.5 bg-blue-700 text-white text-sm font-bold
-            hover:bg-blue-500">Tambah User</a>
+        <a href="{{route('tambahRole')}}" type="button" class="rounded-md p-2.5 bg-blue-700 text-white text-sm font-bold
+            hover:bg-blue-500">Tambah Role</a>
     </div>
     <x-alert-toast />
     <div class=" py-2 px-2 my-2 h-23 rounded-md shadow-lg h-[35rem] bg-white">
@@ -54,16 +54,8 @@
                     class=" sticky top-0 z-10 text-xs h-11 text-white uppercase bg-[#4535C1] dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         @include('livewire.components.tableheader-sort',[
-                        'name' => 'kode_barang',
-                        'displayName'=> 'USERNAME'
-                        ])
-                        @include('livewire.components.tableheader-sort',[
-                        'name' => 'nama_barang',
-                        'displayName'=> 'EMAIL'
-                        ])
-                        @include('livewire.components.tableheader-sort',[
-                        'name' => 'kategori_id',
-                        'displayName'=> 'ROLE'
+                        'name' => 'name',
+                        'displayName'=> 'Role'
                         ])
                         <th scope="col" class="border-r py-3">
                             Action
@@ -71,13 +63,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($users as $user)
+                    @forelse ($roles as $role)
                     <tr class="bg-white border-b-2 dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600 ">
-                        <th scope="row" class="p-4">{{$user->name}}</th>
-                        <td scope="row" class="p-4">{{$user->email}}</td>
-                        <td scope="row" class="p-4"> {{$user->role->name}} </td>
+                        <th scope="row" class="p-4">{{$role->name}}</th>
                         <td scope="row" class="flex p-4">
-                            <a href="{{route('editBarang', $user->id)}}"
+                            <a href=""
                                 class="mr-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
                                             focus:outline-none focus:ring-blue-300 font-medium rounded-md text-xs p-1
                                             text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
@@ -89,7 +79,7 @@
                                         d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
                                 </svg>
                             </a>
-                            <button data-swal-template="#my-template" data-id-user = "{{$user->id}}"
+                            <button data-swal-template="#my-template" data-id-role = "{{$role->id}}"
                                 class="delete-btn text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-md text-xs p-1 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
                                 type="button">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -113,7 +103,7 @@
             </table>
         </div>
         <div class="py-4 px-3">
-            {{$users->links()}}
+            {{$roles->links()}}
         </div>
     </div>
     <template id="my-template">
@@ -135,7 +125,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.delete-btn').forEach(button => {
                 button.addEventListener('click', function(){
-                    const id = this.getAttribute("data-id-user");
+                    const id = this.getAttribute("data-id-role");
                     Swal.fire({
                        template: "#my-template",
                     }).then((result)=>{
