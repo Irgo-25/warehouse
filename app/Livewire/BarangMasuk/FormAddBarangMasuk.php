@@ -26,13 +26,14 @@ class FormAddBarangMasuk extends Component
         'id_barang_masuk' => ['required'],
         'tanggal_masuk' => ['required', 'date'],
         'selectedbarang' => ['required'],
-        'jumlah_masuk' => ['required', 'min:1'],
+        'jumlah_masuk' => ['required', 'integer', 'min:1'],
         'keterangan' => ['required', 'max:220']
     ];
     protected $messages = [
         'selectedunit.required' => 'Unit harus dipilih!',
         'tanggal_masuk.required' => 'Tanggal masuk tidak boleh kosong!',
         'jumlah_masuk.required' => 'Jumlah masuk harus berupa angka!',
+        'jumlah_masuk.min:1' => 'Jumlah masuk tidak boleh kurang dari 1!',
     ];
     public function updatedSelectedbarang()
     {
