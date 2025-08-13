@@ -33,7 +33,7 @@ class FormAddBarangKeluar extends Component
         'selectedunit.required' => 'Unit harus dipilih!',
         'tanggal_keluar.required' => 'Tanggal keluar tidak boleh kosong!',
         'jumlah_keluar.required' => 'Jumlah keluar tidak boleh kosong!',
-        'jumlah_keluar.min:1' => 'Jumlah keluar tidak boleh kurang dari 1!'
+        'jumlah_keluar.min' => 'Jumlah keluar tidak boleh kurang dari 1!'
     ];
 
     public function updatedSelectedbarang()

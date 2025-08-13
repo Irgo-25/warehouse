@@ -32,8 +32,10 @@ class FormAddBarangMasuk extends Component
     protected $messages = [
         'selectedunit.required' => 'Unit harus dipilih!',
         'tanggal_masuk.required' => 'Tanggal masuk tidak boleh kosong!',
-        'jumlah_masuk.required' => 'Jumlah masuk harus berupa angka!',
-        'jumlah_masuk.min:1' => 'Jumlah masuk tidak boleh kurang dari 1!',
+        'jumlah_masuk' => [
+            'required'=>'Jumlah masuk harus berupa angka!',
+            'min' => 'Jumlah masuk tidak boleh kurang dari 1!'
+        ]
     ];
     public function updatedSelectedbarang()
     {

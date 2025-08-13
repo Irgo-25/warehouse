@@ -27,26 +27,32 @@ class CreateUser extends Component
     public function storeUserToIndex()
     {
         $this->validate();
-        User::create([
+        $user = User::create([
             'name' => $this->name,
             'email' => $this->email,
             'password' => Hash::make($this->password),
-            'role_id' => $this->role_id,
+            'role_id' => $this->role_id
         ]);
+        $roleName = Role::findOrFail($this->role_id)->name;
+        // Assign role ke user
+        $user->assignRole($roleName);
         return redirect()->route('user');
     }
     public function storeUser()
     {
         $this->validate();
-        User::create([
+        $user = User::create([
             'name' => $this->name,
             'email' => $this->email,
             'password' => Hash::make($this->password),
-            'role_id' => $this->role_id,
+            'role_id' => $this->role_id
         ]);
+        $roleName = Role::findOrFail($this->role_id)->name;
+
+        // Assign role ke user
+        $user->assignRole($roleName);
         $this->reset();
     }
-
 
     public function render()
     {

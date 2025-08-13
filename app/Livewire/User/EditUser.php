@@ -55,6 +55,8 @@ class EditUser extends Component
             $user->password = Hash::make($this->password);
         }
         $user->save();
+        $roleName = Role::findOrFail($this->role_id)->name;
+        $user->syncRoles($roleName);
         return redirect()->route('user');
     }
 
