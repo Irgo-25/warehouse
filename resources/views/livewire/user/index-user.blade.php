@@ -54,15 +54,15 @@
                     class=" sticky top-0 z-10 text-xs h-11 text-white uppercase bg-[#4535C1] dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         @include('livewire.components.tableheader-sort',[
-                        'name' => 'kode_barang',
+                        'name' => 'name',
                         'displayName'=> 'USERNAME'
                         ])
                         @include('livewire.components.tableheader-sort',[
-                        'name' => 'nama_barang',
+                        'name' => 'email',
                         'displayName'=> 'EMAIL'
                         ])
                         @include('livewire.components.tableheader-sort',[
-                        'name' => 'kategori_id',
+                        'name' => 'role_id',
                         'displayName'=> 'ROLE'
                         ])
                         <th scope="col" class="border-r py-3">

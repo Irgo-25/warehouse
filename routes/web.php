@@ -21,6 +21,7 @@ use App\Livewire\BarangMasuk\ListBarangMasuk;
 use App\Livewire\BarangKeluar\ListBarangKeluar;
 use App\Livewire\BarangMasuk\FormAddBarangMasuk;
 use App\Livewire\BarangKeluar\FormAddBarangKeluar;
+use App\Livewire\Permission\IndexPermission;
 use App\Livewire\Roles\CreateRole;
 use App\Livewire\Roles\IndexRole;
 
@@ -51,7 +52,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('tambah-role', CreateRole::class)->name('tambahRole');
 
     // Permission
-    
+    Route::get('permissions', IndexPermission::class)->name('permission');
     //route kategori
     Route::get('kategori-barang', Kategori::class)->name('kategoriBarang');
     Route::get('tambah-kategori', CreateKategori::class)->name('addKategori');

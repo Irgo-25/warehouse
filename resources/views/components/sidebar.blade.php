@@ -49,8 +49,8 @@
                             <span class="ms-3">Roles</span>
                         </x-nav-link>
                     </li>
-                    {{-- <li>
-                        <x-nav-link href="{{route('user')}}" :active="request()->routeIs('user')">
+                    <li>
+                        <x-nav-link href="{{route('permission')}}" :active="request()->routeIs('permission')">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="size-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -58,7 +58,7 @@
                             </svg>
                             <span class="ms-3">Permissions</span>
                         </x-nav-link>
-                    </li> --}}
+                    </li>
                 </ul>
             </li>
             <li>
