@@ -31,7 +31,6 @@ class CreateUser extends Component
             'name' => $this->name,
             'email' => $this->email,
             'password' => Hash::make($this->password),
-            'role_id' => $this->role_id
         ]);
         $roleName = Role::findOrFail($this->role_id)->name;
         // Assign role ke user
@@ -45,7 +44,6 @@ class CreateUser extends Component
             'name' => $this->name,
             'email' => $this->email,
             'password' => Hash::make($this->password),
-            'role_id' => $this->role_id
         ]);
         $roleName = Role::findOrFail($this->role_id)->name;
 

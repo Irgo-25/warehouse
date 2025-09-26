@@ -51,11 +51,10 @@ class User extends Authenticatable
 
     public function scopeSearch(Builder $query, $value){
         $query->where('name', 'like', "%$value%")->orWhere('email', 'like', "%$value%");
-
     }
 
-    public function role(){
-        return $this->belongsTo(Role::class);
-    }
+    // public function roles(){
+    //     return $this->belongsTo(Role::class);
+    // }
 
 }

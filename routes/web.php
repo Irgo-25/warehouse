@@ -21,7 +21,9 @@ use App\Livewire\BarangMasuk\ListBarangMasuk;
 use App\Livewire\BarangKeluar\ListBarangKeluar;
 use App\Livewire\BarangMasuk\FormAddBarangMasuk;
 use App\Livewire\BarangKeluar\FormAddBarangKeluar;
+use App\Livewire\Permission\CreatePermission;
 use App\Livewire\Permission\IndexPermission;
+use App\Livewire\Role\EditRole;
 use App\Livewire\Roles\CreateRole;
 use App\Livewire\Roles\IndexRole;
 
@@ -41,21 +43,23 @@ Route::middleware(['guest'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     // Dashboard
-    Route::get('beranda', Dasboard::class)->name('dashboard');
+    Route::get('dashboard', Dasboard::class)->name('dashboard');
     // user
-    Route::get('users', IndexUser::class)->name('user');
-    Route::get('tambah-user', CreateUser::class)->name('createUser');
-    Route::get('ubah-user/{id}', EditUser::class)->name('editUser');
+    Route::get('user', IndexUser::class)->name('user');
+    Route::get('create-user', CreateUser::class)->name('createUser');
+    Route::get('edit-user/{id}', EditUser::class)->name('editUser');
 
     // Role
     Route::get('roles', IndexRole::class)->name('role');
-    Route::get('tambah-role', CreateRole::class)->name('tambahRole');
+    Route::get('create-role', CreateRole::class)->name('createRole');
+    Route::get('edit-role/{role}', EditRole::class)->name('editRole');
 
     // Permission
     Route::get('permissions', IndexPermission::class)->name('permission');
+    Route::get('create-permission', CreatePermission::class)->name('createPermission');
     //route kategori
-    Route::get('kategori-barang', Kategori::class)->name('kategoriBarang');
-    Route::get('tambah-kategori', CreateKategori::class)->name('addKategori');
+    Route::get('category-product', Kategori::class)->name('categoryProduct');
+    Route::get('add-category', CreateKategori::class)->name('addCategory');
     Route::get('ubah-kategori/{id_kategori}', EditKategori::class)->name('editKategori');
     
     // route Barang

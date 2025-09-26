@@ -10,7 +10,7 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('components.layouts.app')]
-#[Title('Dashboard')]
+#[Title('Beranda')]
 class Dasboard extends Component
 {
     public $dataBarang, $barangMasuk, $barangKeluar;

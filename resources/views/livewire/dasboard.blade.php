@@ -4,7 +4,7 @@
         <div
             class="flex gap-3 p-3 w-64 bg-red-300 border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
             <div>
-                <h2 class="text-2xl font-semibold">Data Barang</h2>
+                <h2 class="text-2xl font-semibold">Product</h2>
                 <h1 class="text-4xl font-semibold text-white">{{$dataBarang}}</h1>
             </div>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -15,12 +15,12 @@
         </div>
         <div
             class="max-w-xs w-64 p-3 bg-blue-300 border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-            <h2 class="text-2xl font-semibold">Barang Masuk</h2>
+            <h2 class="text-2xl font-semibold">Incoming Goods</h2>
             <h1 class="text-3xl font-semibold text-white">{{$barangMasuk}}</h1>
         </div>
         <div
             class="max-w-xs w-64 p-3 bg-green-300 border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-            <h2 class="text-2xl font-semibold">Barang Keluar</h2>
+            <h2 class="text-2xl font-semibold">Outgoing Goods</h2>
             <h1 class="text-3xl font-semibold text-white">{{$barangKeluar}}</h1>
         </div>
     </div>

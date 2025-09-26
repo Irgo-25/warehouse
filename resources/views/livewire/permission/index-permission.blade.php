@@ -1,8 +1,8 @@
 <div class="fixed w-[95%] md:w-[81%]">
     <div class="flex justify-between items-center">
-        <h1 class="text-xl my-2 font-semibold">User</h1>
-        <a href="{{route('tambahRole')}}" type="button" class="rounded-md p-2.5 bg-blue-700 text-white text-sm font-bold
-            hover:bg-blue-500">Tambah Role</a>
+        <h1 class="text-3xl font-semibold">Permission</h1>
+        <a href="{{route('createPermission')}}" type="button" class="rounded-md p-2.5 bg-blue-700 text-white text-sm font-bold
+            hover:bg-blue-500">Add Permission</a>
     </div>
     <x-alert-toast />
     <div class=" py-2 px-2 my-2 h-23 rounded-md shadow-lg h-[35rem] bg-white">
@@ -10,7 +10,7 @@
         <div class=" flex justify-between items-center">
             <div>
                 <input wire:model.live.debounce.300ms="search" class="rounded-md" type="text"
-                    placeholder="Masukan Kata Kunci">
+                    placeholder="Enter Keyword">
             </div>
             {{-- Button Export --}}
             <button id="dropdownDelayButton" data-dropdown-toggle="dropdownDelay" data-dropdown-delay="3000"
@@ -55,7 +55,7 @@
                     <tr>
                         @include('livewire.components.tableheader-sort',[
                         'name' => 'name',
-                        'displayName'=> 'Permission'
+                        'displayName'=> 'PERMISSION'
                         ])
                         <th scope="col" class="border-r py-3">
                             Action
@@ -79,7 +79,7 @@
                                         d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
                                 </svg>
                             </a>
-                            <button data-swal-template="#my-template" data-id-role = "{{$permission->id}}"
+                            <button data-swal-template="#my-template" data-id-permission = "{{$permission->id}}"
                                 class="delete-btn text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-md text-xs p-1 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
                                 type="button">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -94,8 +94,7 @@
                     @empty
                     <tr>
                         <td colspan="6">
-                            <p class="text-lg font-semibold text-center text-black ">Data User
-                                Kosong</p>
+                            <p class="text-lg font-semibold text-center text-black ">Empty Permission</p>
                         </td>
                     </tr>
                     @endforelse
@@ -125,7 +124,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.delete-btn').forEach(button => {
                 button.addEventListener('click', function(){
-                    const id = this.getAttribute("data-id-role");
+                    const id = this.getAttribute("data-id-permission");
                     Swal.fire({
                        template: "#my-template",
                     }).then((result)=>{

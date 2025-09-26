@@ -15,7 +15,7 @@ class IndexPermission extends Component
     use WithPagination;
     public $sortBy = 'name';
     public $sortDir = 'desc';
-    public $perPage = 5;
+    public $perPage = 10;
     public $search;
 
     public function sorting($setColumn)

@@ -1,8 +1,8 @@
 <div class="fixed w-[95%] md:w-[81%]">
     <div class="flex justify-between items-center">
-        <h1 class="text-xl my-2 font-semibold">User</h1>
+        <h1 class="text-3xl font-semibold">User</h1>
         <a href="{{route('createUser')}}" type="button" class="rounded-md p-2.5 bg-blue-700 text-white text-sm font-bold
-            hover:bg-blue-500">Tambah User</a>
+            hover:bg-blue-500">Add User</a>
     </div>
     <x-alert-toast />
     <div class=" py-2 px-2 my-2 h-23 rounded-md shadow-lg h-[35rem] bg-white">
@@ -10,7 +10,7 @@
         <div class=" flex justify-between items-center">
             <div>
                 <input wire:model.live.debounce.300ms="search" class="rounded-md" type="text"
-                    placeholder="Masukan Kata Kunci">
+                    placeholder="Enter keyword">
             </div>
             {{-- Button Export --}}
             <button id="dropdownDelayButton" data-dropdown-toggle="dropdownDelay" data-dropdown-delay="3000"
@@ -40,6 +40,7 @@
                 <label class="w-16 text-sm font-medium text-gray-900">Per Page</label>
                 <select wire:model.live="perPage"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-20 p-2.5 ">
+                    <option value="5">5</option>
                     <option value="10">10</option>
                     <option value="20">20</option>
                     <option value="50">50</option>
@@ -75,7 +76,18 @@
                     <tr class="bg-white border-b-2 dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600 ">
                         <th scope="row" class="p-4">{{$user->name}}</th>
                         <td scope="row" class="p-4">{{$user->email}}</td>
-                        <td scope="row" class="p-4"> {{$user->role->name}} </td>
+                        <td scope="row" class="p-4"> @forelse($user->roles as $role)
+                            <span
+                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800 mr-1">
+                                {{ $role->name }}
+                            </span>
+                            @empty
+                            <span
+                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
+                                Tidak ada role
+                            </span>
+                            @endforelse
+                        </td>
                         <td scope="row" class="flex p-4">
                             <a href="{{route('editUser', $user->id)}}"
                                 class="mr-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
@@ -89,7 +101,7 @@
                                         d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
                                 </svg>
                             </a>
-                            <button data-swal-template="#my-template" data-id-user = "{{$user->id}}"
+                            <button data-swal-template="#my-template" data-id-user="{{$user->id}}"
                                 class="delete-btn text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-md text-xs p-1 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
                                 type="button">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -104,8 +116,7 @@
                     @empty
                     <tr>
                         <td colspan="6">
-                            <p class="text-lg font-semibold text-center text-black ">Data User
-                                Kosong</p>
+                            <p class="text-lg font-semibold text-center text-black ">User Empty</p>
                         </td>
                     </tr>
                     @endforelse
@@ -118,7 +129,7 @@
     </div>
     <template id="my-template">
         <swal-title>
-            Yakin Ingin Menghapus??
+            Are you sure you want to delete?
         </swal-title>
         <swal-icon type="warning" color="red"></swal-icon>
         <swal-button type="confirm" color="red">

@@ -18,7 +18,7 @@ class EditUser extends Component
     public $name;
     public $email;
     public $password;
-    public $role_id;
+
 
     public function mount($id)
     {
@@ -26,7 +26,7 @@ class EditUser extends Component
         $this->userID = $user->id;
         $this->name = $user->name;
         $this->email = $user->email;
-        $this->role_id = $user->role_id;
+
     }
 
 

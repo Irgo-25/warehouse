@@ -19,6 +19,7 @@ class IndexUser extends Component
     public $perPage = 5;
     public $search;
     protected $listeners = ['deleteConfirmed' => 'delete'];
+    
     public function sorting($setColumn)
     {
         if ($this->sortBy == $setColumn) {
@@ -27,7 +28,6 @@ class IndexUser extends Component
         }
         $this->sortBy = $setColumn;
     }
-
     public function delete($id)
     {
         $user = User::where('id', $id)->first();
@@ -38,7 +38,7 @@ class IndexUser extends Component
     }
     public function render()
     {
-        $users = User::with('role')->search($this->search)
+        $users = User::with('roles')->search($this->search)
         ->orderBy($this->sortBy, $this->sortDir)
         ->paginate($this->perPage);
         return view('livewire.user.index-user', [

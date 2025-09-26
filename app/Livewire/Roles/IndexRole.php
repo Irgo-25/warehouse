@@ -17,7 +17,7 @@ class IndexRole extends Component
     public $sortDir = 'desc';
     public $perPage = 5;
     public $search;
-
+    protected $listeners = ['deleteConfirmed' => 'delete'];
     public function sorting($setColumn)
     {
         if ($this->sortBy == $setColumn) {
@@ -26,10 +26,18 @@ class IndexRole extends Component
         }
         $this->sortBy = $setColumn;
     }
+    public function delete($id)
+    {
+        $role = Role::where('id', $id)->first();
+        if ($role) {
+            $role->delete();
+            $this->dispatch('swal:deleted');
+        }
+    }
     public function render()
     {
         $roles = Role::query()
-        ->search($this->search)
+            ->search($this->search)
             ->orderBy($this->sortBy, $this->sortDir)
             ->paginate($this->perPage);
         return view('livewire.roles.index-role', [

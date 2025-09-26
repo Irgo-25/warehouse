@@ -1,34 +1,26 @@
 <?php
 
-namespace App\Livewire\Roles;
+namespace App\Livewire\Permission;
 
 use Livewire\Component;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
 #[Layout('components.layouts.app')]
-#[Title('Roles')]
-class CreateRole extends Component
+#[Title('Create Permission')]
+class CreatePermission extends Component
 {
-    public $name;
-    public $permissions = [];
-    public $selectedPermissions = [];
+        public $name;
 
-    public function mount()
-    {
-        $this->permissions = Permission::all();
-    }
     public function store()
     {
         $this->validate([
             'name' => 'required'
         ]);
-        $role = new Role();
+        $role = new Permission();
         $role->name = $this->name;
         $role->save();
-        $role->syncPermissions($this->selectedPermissions);
         $this->reset();
     }
     public function storeToIndex()
@@ -36,15 +28,14 @@ class CreateRole extends Component
         $this->validate([
             'name' => 'required'
         ]);
-        $role = new Role();
+        $role = new Permission();
         $role->name = $this->name;
         $role->save();
-        $role->syncPermissions($this->selectedPermissions);
         $this->reset();
         return redirect()->route('role');
     }
     public function render()
     {
-        return view('livewire.roles.create-role');
+        return view('livewire.permission.create-permission');
     }
 }

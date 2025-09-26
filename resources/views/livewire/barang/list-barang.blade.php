@@ -1,7 +1,7 @@
 <div class="fixed w-[95%] md:w-[81%]">
     <div class="flex justify-between items-center">
-        <h2 class="text-3xl font-semibold">List Barang</h2>
-        <a href="{{route('addBarang')}}" type="button" class="px-4 py-2 bg-blue-700 text-white rounded">Tambah</a>
+        <h2 class="text-3xl font-semibold">Product</h2>
+        <a href="{{route('addBarang')}}" type="button" class="px-4 py-2 bg-blue-700 text-white rounded">Add Product</a>
     </div>
 
     <x-alert-toast />
@@ -10,7 +10,7 @@
         <div class=" flex justify-between items-center">
             <div>
                 <input wire:model.live.debounce.300ms="search" class="rounded-md" type="text"
-                    placeholder="Masukan Kata Kunci">
+                    placeholder="Enter Keyword">
             </div>
             {{-- Button Export --}}
             <button id="dropdownDelayButton" data-dropdown-toggle="dropdownDelay" data-dropdown-delay="3000"
@@ -55,15 +55,15 @@
                     <tr>
                         @include('livewire.components.tableheader-sort',[
                         'name' => 'kode_barang',
-                        'displayName'=> 'KODE BARANG'
+                        'displayName'=> 'PRODUCT CODE'
                         ])
                         @include('livewire.components.tableheader-sort',[
                         'name' => 'nama_barang',
-                        'displayName'=> 'NAMA BARANG'
+                        'displayName'=> 'PRODUCT NAME'
                         ])
                         @include('livewire.components.tableheader-sort',[
                         'name' => 'kategori_id',
-                        'displayName'=> 'KATEGORI'
+                        'displayName'=> 'CATEGORY'
                         ])
                         @include('livewire.components.tableheader-sort',[
                         'name' => 'stock',
@@ -114,8 +114,7 @@
                     @empty
                     <tr>
                         <td colspan="6">
-                            <p class="text-lg font-semibold text-center text-black ">Data Barang
-                                Kosong</p>
+                            <p class="text-lg font-semibold text-center text-black ">Empty Product</p>
                         </td>
                     </tr>
                     @endforelse
@@ -128,7 +127,7 @@
     </div>
     <template id="my-template">
         <swal-title>
-            Yakin Ingin Menghapus??
+            Are you sure you want to delete?
         </swal-title>
         <swal-icon type="warning" color="red"></swal-icon>
         <swal-button type="confirm" color="red">

@@ -1,8 +1,8 @@
 <div class="fixed w-[95%] md:w-[81%]">
     <div class="flex justify-between items-center">
-        <h1 class="text-xl my-2 font-semibold">User</h1>
-        <a href="{{route('tambahRole')}}" type="button" class="rounded-md p-2.5 bg-blue-700 text-white text-sm font-bold
-            hover:bg-blue-500">Tambah Role</a>
+        <h1 class="text-3xl font-semibold">Roles</h1>
+        <a href="{{route('createRole')}}" type="button" class="rounded-md p-2.5 bg-blue-700 text-white text-sm font-bold
+            hover:bg-blue-500">Add Role</a>
     </div>
     <x-alert-toast />
     <div class=" py-2 px-2 my-2 h-23 rounded-md shadow-lg h-[35rem] bg-white">
@@ -10,7 +10,7 @@
         <div class=" flex justify-between items-center">
             <div>
                 <input wire:model.live.debounce.300ms="search" class="rounded-md" type="text"
-                    placeholder="Masukan Kata Kunci">
+                    placeholder="Enter Keyword">
             </div>
             {{-- Button Export --}}
             <button id="dropdownDelayButton" data-dropdown-toggle="dropdownDelay" data-dropdown-delay="3000"
@@ -55,7 +55,7 @@
                     <tr>
                         @include('livewire.components.tableheader-sort',[
                         'name' => 'name',
-                        'displayName'=> 'Role'
+                        'displayName'=> 'ROLE'
                         ])
                         <th scope="col" class="border-r py-3">
                             Action
@@ -67,7 +67,7 @@
                     <tr class="bg-white border-b-2 dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600 ">
                         <th scope="row" class="p-4">{{$role->name}}</th>
                         <td scope="row" class="flex p-4">
-                            <a href=""
+                            <a href="{{route('editRole',$role->id)}}"
                                 class="mr-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
                                             focus:outline-none focus:ring-blue-300 font-medium rounded-md text-xs p-1
                                             text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
@@ -94,8 +94,7 @@
                     @empty
                     <tr>
                         <td colspan="6">
-                            <p class="text-lg font-semibold text-center text-black ">Data User
-                                Kosong</p>
+                            <p class="text-lg font-semibold text-center text-black ">Empty Role</p>
                         </td>
                     </tr>
                     @endforelse
@@ -108,7 +107,7 @@
     </div>
     <template id="my-template">
         <swal-title>
-            Yakin Ingin Menghapus??
+            Are you sure you want to delete?
         </swal-title>
         <swal-icon type="warning" color="red"></swal-icon>
         <swal-button type="confirm" color="red">

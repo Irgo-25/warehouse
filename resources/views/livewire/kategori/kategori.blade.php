@@ -1,6 +1,6 @@
 <div>
     <h1 class="text-3xl my-2">Kategori Barang</h1>
-    <a href="{{route('addKategori')}}" type="button" class="rounded-md p-2 bg-blue-700 text-white text-xs font-bold
+    <a href="{{route('addCategory')}}" type="button" class="rounded-md p-2 bg-blue-700 text-white text-xs font-bold
        hover:bg-blue-500">Tambah Kategori</a>
     <div class=" py-2 my-2">
         <div class="max-w-3xl ">

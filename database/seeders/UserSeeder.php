@@ -18,7 +18,6 @@ class UserSeeder extends Seeder
             'name' => 'Irgo Satya Gemiwang',
             'email' => 'irgosg@gmail.com',
             'password' => Hash::make('Irgo123'),
-            'role_id' => 1,
         ]);
         $user1->assignRole('admin');
 
@@ -26,7 +25,6 @@ class UserSeeder extends Seeder
             'name' => 'Ragil Bagus',
             'email' => 'ragil21@gmail.com',
             'password' => Hash::make('Ragil123'),
-            'role_id' => 2,
         ]);
         $user2->assignRole('gudang');
 
@@ -34,7 +32,6 @@ class UserSeeder extends Seeder
             'name' => 'Ramadhan',
             'email' => 'Ramadhan@gmail.com',
             'password' => Hash::make('Rama123'),
-            'role_id' => 3,
         ]);
         $user3->assignRole('accounting');
     }
